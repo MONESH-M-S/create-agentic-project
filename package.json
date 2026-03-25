@@ -1,0 +1,36 @@
+{
+  "name": "create-agentic-project",
+  "version": "0.1.0",
+  "description": "Scaffold a minimal AI-powered project delivery workflow inside the current folder.",
+  "license": "MIT",
+  "type": "module",
+  "bin": {
+    "create-agentic-project": "./dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "prepublishOnly": "npm run typecheck && npm run build",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [
+    "ai",
+    "agentic",
+    "bunx",
+    "scaffold"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.14",
+    "tsup": "^8.5.0",
+    "typescript": "^5.8.2"
+  }
+}
