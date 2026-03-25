@@ -1,11 +1,11 @@
 {
-  "name": "create-agentic-project",
-  "version": "1.0.3",
+  "name": "create-agentic-starter",
+  "version": "0.1.1",
   "description": "Scaffold a minimal AI-powered project delivery workflow inside the current folder.",
   "license": "MIT",
   "type": "module",
   "bin": {
-    "create-agentic-project": "./dist/index.js"
+    "create-agentic-starter": "./dist/index.js"
   },
   "files": [
     "dist"

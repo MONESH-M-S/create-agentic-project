@@ -17,7 +17,7 @@ const fileContents = (cwd: string): FileMap => {
   return {
     "README.md": `# ${projectName}
 
-This project uses \`create-agentic-project\` to standardize discovery, architecture, documentation, and estimation workflows.
+This project uses \`create-agentic-starter\` to standardize discovery, architecture, documentation, and estimation workflows.
 
 ## Start Here
 
@@ -271,7 +271,7 @@ async function main() {
   await writeScaffoldFiles(cwd);
 
   console.log("");
-  console.log("create-agentic-project: scaffold created successfully.");
+  console.log("create-agentic-starter: scaffold created successfully.");
   console.log(`Project folder: ${cwd}`);
   console.log("");
   console.log("Next steps:");
@@ -283,6 +283,6 @@ async function main() {
 
 main().catch((error: unknown) => {
   const message = error instanceof Error ? error.message : String(error);
-  console.error(`create-agentic-project: failed to scaffold project. ${message}`);
+  console.error(`create-agentic-starter: failed to scaffold project. ${message}`);
   process.exitCode = 1;
 });
