@@ -1,7 +1,14 @@
-import { mkdir, rm, writeFile } from "node:fs/promises";
+import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
 
 type FileMap = Record<string, string>;
+
+const README_PATH = "README.md";
+const GITIGNORE_PATH = ".gitignore";
+const README_MARKER_START = "<!-- from create-agentic-starter:start -->";
+const README_MARKER_END = "<!-- from create-agentic-starter:end -->";
+const GITIGNORE_MARKER_START = "# from create-agentic-starter:start";
+const GITIGNORE_MARKER_END = "# from create-agentic-starter:end";
 
 const RESET_PATHS = [
   ".agentic",
@@ -269,6 +276,33 @@ When done, tell the user the v1 workflow is complete and list the generated file
 `,
 });
 
+const readmeBlock = `${README_MARKER_START}
+## Agentic Starter
+
+This project includes a reusable AI workflow scaffold under \`.agentic/\`.
+
+Start every new AI session with:
+
+\`@.agentic/init.md\`
+
+Command flow:
+
+1. \`@.agentic/init.md\`
+2. \`@.agentic/commands/project-requirements.md\`
+3. \`@.agentic/commands/architecture.md\`
+4. \`@.agentic/commands/create-brd.md\`
+5. \`@.agentic/commands/create-frd.md\`
+6. \`@.agentic/commands/create-estimate.md\`
+7. \`@.agentic/commands/create-proposal.md\`
+${README_MARKER_END}
+`;
+
+const gitignoreBlock = `${GITIGNORE_MARKER_START}
+.agentic/workspace/documents/
+.agentic/workspace/memory/
+${GITIGNORE_MARKER_END}
+`;
+
 const directories = [
   ".agentic",
   ".agentic/commands",
@@ -302,12 +336,71 @@ async function writeScaffoldFiles(cwd: string) {
   );
 }
 
+function upsertManagedBlock(
+  existingContent: string,
+  block: string,
+  startMarker: string,
+  endMarker: string,
+) {
+  const pattern = new RegExp(
+    `${escapeRegExp(startMarker)}[\\s\\S]*?${escapeRegExp(endMarker)}\\n?`,
+    "m",
+  );
+
+  if (pattern.test(existingContent)) {
+    return existingContent.replace(pattern, `${block}\n`);
+  }
+
+  const suffix = existingContent.endsWith("\n") ? "\n" : "\n\n";
+  return `${existingContent}${suffix}${block}\n`;
+}
+
+function escapeRegExp(value: string) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+async function upsertOptionalFile(
+  cwd: string,
+  relativePath: string,
+  block: string,
+  startMarker: string,
+  endMarker: string,
+) {
+  const fullPath = path.join(cwd, relativePath);
+
+  try {
+    const existing = await readFile(fullPath, "utf8");
+    const next = upsertManagedBlock(existing, block, startMarker, endMarker);
+    await writeFile(fullPath, next, "utf8");
+  } catch (error: unknown) {
+    if ((error as NodeJS.ErrnoException).code !== "ENOENT") {
+      throw error;
+    }
+
+    await writeFile(fullPath, `${block}\n`, "utf8");
+  }
+}
+
 async function main() {
   const cwd = process.cwd();
 
   await resetGeneratedPaths(cwd);
   await createDirectories(cwd);
   await writeScaffoldFiles(cwd);
+  await upsertOptionalFile(
+    cwd,
+    README_PATH,
+    readmeBlock,
+    README_MARKER_START,
+    README_MARKER_END,
+  );
+  await upsertOptionalFile(
+    cwd,
+    GITIGNORE_PATH,
+    gitignoreBlock,
+    GITIGNORE_MARKER_START,
+    GITIGNORE_MARKER_END,
+  );
 
   console.log("");
   console.log("create-agentic-starter: scaffold created successfully.");
