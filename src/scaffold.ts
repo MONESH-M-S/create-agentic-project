@@ -60,7 +60,8 @@ You are starting a fresh AI session inside this project. Your job is to quickly 
 8. Write drafts even from partial information.
 9. Clearly separate confirmed facts, assumptions, and open questions.
 10. Do not route immediately just because the workspace is empty. Do useful synthesis or ask focused questions first.
-11. Once you have done useful intake work, end with:
+11. If important project basics are still missing, continue asking focused questions and keep updating the memory files instead of routing forward yet.
+12. Only when you have done enough useful intake work to create a solid initial understanding, end with:
 
 \`Next type @.agentic/commands/project-requirements.md\`
 `,
@@ -144,9 +145,10 @@ Read:
    - \`.agentic/workspace/memory/open-questions.md\`
 7. Capture assumptions separately from confirmed facts.
 8. Reduce open questions where possible before handing off to architecture.
-9. Ask only for missing details that block useful requirement understanding.
+9. If the requirement understanding is still weak or important gaps remain, continue asking focused project questions and keep updating the memory files.
+10. Only ask for missing details that block useful requirement understanding.
 
-When done, tell the user:
+When the requirements are strong enough for architecture work, tell the user:
 
 \`Next type @.agentic/commands/architecture.md\`
 `,
@@ -168,9 +170,10 @@ Read:
 4. Add a diagram description or mermaid diagram when supported.
 5. Mention draw.io MCP only as an optional tool if available in the user's environment.
 6. If relevant screenshots, notes, or references are found outside \`.agentic/workspace/project/\`, move or organize them into the workspace by default unless the user explicitly says not to.
-7. Ask only the minimum blocking questions.
+7. If architecture-critical information is still missing, ask architecture-specific questions and keep updating \`.agentic/workspace/memory/architecture.md\` instead of routing yet.
+8. Ask only the minimum blocking questions.
 
-When done, tell the user:
+When the architecture is strong enough for BRD drafting, tell the user:
 
 \`Next type @.agentic/commands/create-brd.md\`
 `,
@@ -190,9 +193,9 @@ Read:
 2. Produce a polished markdown Business Requirements Document.
 3. Use confirmed facts first and clearly label assumptions where needed.
 4. If relevant source material is outside \`.agentic/workspace/project/\`, move or organize it into the workspace by default unless the user explicitly says not to.
-5. If critical information is missing, ask only the minimum blocking questions before drafting.
+5. If critical information is missing, ask only the minimum blocking questions and keep improving the BRD draft instead of routing yet.
 
-When done, tell the user:
+When the BRD is solid enough to define functional requirements, tell the user:
 
 \`Next type @.agentic/commands/create-frd.md\`
 `,
@@ -213,9 +216,10 @@ Read:
 2. Produce a polished markdown Functional Requirements Document.
 3. Cover modules, flows, validations, roles, and edge cases where relevant.
 4. If relevant source material is outside \`.agentic/workspace/project/\`, move or organize it into the workspace by default unless the user explicitly says not to.
-5. Ask only the minimum blocking questions.
+5. If important functional details are still missing, ask focused follow-up questions and keep improving the FRD instead of routing yet.
+6. Ask only the minimum blocking questions.
 
-When done, tell the user:
+When the FRD is strong enough for estimation, tell the user:
 
 \`Next type @.agentic/commands/create-estimate.md\`
 `,
@@ -236,9 +240,10 @@ Read:
 2. Produce a markdown estimate with effort breakdown, assumptions, dependencies, and risks.
 3. Keep the estimate aligned with the known scope and clearly state uncertainty.
 4. If relevant source material is outside \`.agentic/workspace/project/\`, move or organize it into the workspace by default unless the user explicitly says not to.
-5. Ask only the minimum blocking questions.
+5. If the estimate is too uncertain because key delivery information is missing, ask focused follow-up questions and keep refining the estimate instead of routing yet.
+6. Ask only the minimum blocking questions.
 
-When done, tell the user:
+When the estimate is strong enough for proposal drafting, tell the user:
 
 \`Next type @.agentic/commands/create-proposal.md\`
 `,
@@ -260,8 +265,9 @@ Read:
 2. Produce a polished markdown proposal using the known scope, architecture direction, and estimate.
 3. Make gaps explicit instead of inventing details.
 4. If relevant screenshots, decks, notes, or references are found outside \`.agentic/workspace/project/\`, move or organize them into the workspace by default unless the user explicitly says not to.
-5. Ask only the minimum blocking questions.
+5. If key proposal inputs are still missing, ask focused questions and keep improving the proposal instead of prematurely declaring completion.
+6. Ask only the minimum blocking questions.
 
-When done, tell the user the v1 workflow is complete and list the generated files.
+When the proposal is complete enough for handoff, tell the user the v1 workflow is complete and list the generated files.
 `,
 });
