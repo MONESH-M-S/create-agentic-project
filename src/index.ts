@@ -5,238 +5,277 @@ type FileMap = Record<string, string>;
 
 const RESET_PATHS = [
   ".agentic",
-  "workspace",
   "AGENTS.md",
-  "README.md",
-  ".gitignore",
 ];
 
-const fileContents = (cwd: string): FileMap => {
-  const projectName = path.basename(cwd);
+const fileContents = (): FileMap => ({
+  "AGENTS.md": `# Agentic Starter Guide
 
-  return {
-    "README.md": `# ${projectName}
+This scaffold creates a reusable AI working area under \`.agentic/\` for project kick-off and pre-delivery documentation.
 
-This project uses \`create-agentic-starter\` to standardize discovery, architecture, documentation, and estimation workflows.
+## What This Is For
 
-## Start Here
+Use this scaffold when you want an AI tool to:
 
-1. Drop Figma or requirement screenshots into \`.agentic/workspace/requirements/figma-screenshots/\`.
-2. Open your AI tool in this folder.
-3. Start a new chat with \`@.agentic/init.md\`.
+- understand a project from files, notes, screenshots, and links
+- maintain structured project memory
+- generate markdown deliverables such as BRD, FRD, estimate, and proposal
 
-## Flow
+## Folder Purpose
 
-The scaffold guides the team through these steps:
+- \`.agentic/init.md\`: first prompt for every new AI session
+- \`.agentic/context.md\`: shared rules and folder map
+- \`.agentic/commands/\`: task-specific prompt files you reference in your AI tool
+- \`.agentic/workspace/project/\`: raw project inputs such as screenshots, notes, requirement docs, and reference links
+- \`.agentic/workspace/memory/\`: evolving AI-maintained project understanding
+- \`.agentic/workspace/documents/\`: polished markdown deliverables
 
-1. Project understanding
-2. Architecture
-3. BRD
-4. FRD
-5. Estimation
+## How To Use It
+
+1. Open your AI tool in this project.
+2. Start every new session with \`@.agentic/init.md\`.
+3. Follow the command sequence below.
+
+## V1 Command Sequence
+
+1. \`@.agentic/init.md\`
+2. \`@.agentic/commands/project-requirements.md\`
+3. \`@.agentic/commands/architecture.md\`
+4. \`@.agentic/commands/create-brd.md\`
+5. \`@.agentic/commands/create-frd.md\`
+6. \`@.agentic/commands/create-estimate.md\`
+7. \`@.agentic/commands/create-proposal.md\`
+
+If your tool does not support \`@file\` references, paste the contents of the prompt file into a new chat manually.
 `,
-    ".gitignore": `.DS_Store
-node_modules
-dist
-.agentic/workspace/analysis
-.agentic/workspace/documents
+  ".agentic/init.md": `# Init
+
+Read \`@.agentic/context.md\` first.
+
+You are starting a fresh AI session inside this project. Your job is to build lightweight orientation without over-reading the repository.
+
+## Read Scope
+
+1. Read only root-level files and folders in the current project.
+2. Do not recursively inspect the full repository.
+3. Treat \`.agentic/\` as the exception:
+   - inspect \`.agentic/workspace/project/\`
+   - inspect \`.agentic/workspace/memory/\`
+   - inspect \`.agentic/workspace/documents/\`
+4. Use existing workspace context if it is already present.
+
+## What To Do
+
+1. Summarize the root-level project structure.
+2. Summarize what already exists in \`.agentic/workspace/project/\`, \`.agentic/workspace/memory/\`, and \`.agentic/workspace/documents/\`.
+3. Build a lightweight understanding from:
+   - root-level structure
+   - existing workspace files
+   - the user's message in this chat
+4. If the user mentions screenshots, notes, requirement docs, links, or file paths, tell them how those should be placed or referenced under \`.agentic/workspace/project/\`.
+5. If project materials are missing, say what would be useful to add, but continue with what you can understand already.
+6. Ask only blocking clarification questions.
+7. End with:
+
+\`Next type @.agentic/commands/project-requirements.md\`
 `,
-    "AGENTS.md": `# Agent Instructions
+  ".agentic/context.md": `# Context
 
-If your tool does not support \`@file\` references, start by pasting the contents of [./.agentic/init.md](./.agentic/init.md) into a new chat.
+This repository uses a prompt-based project kick-off system.
 
-Core files:
+## Folder Map
 
-- [./.agentic/init.md](./.agentic/init.md)
-- [./.agentic/context.md](./.agentic/context.md)
-- [./.agentic/instructions/01-project-understanding.md](./.agentic/instructions/01-project-understanding.md)
-- [./.agentic/instructions/02-architecture.md](./.agentic/instructions/02-architecture.md)
-- [./.agentic/instructions/03-brd.md](./.agentic/instructions/03-brd.md)
-- [./.agentic/instructions/04-frd.md](./.agentic/instructions/04-frd.md)
-- [./.agentic/instructions/05-estimation.md](./.agentic/instructions/05-estimation.md)
+- \`.agentic/init.md\`: session bootstrap prompt
+- \`.agentic/context.md\`: shared rules and folder semantics
+- \`.agentic/commands/\`: prompt files for distinct tasks
+- \`.agentic/workspace/project/\`: raw project materials
+- \`.agentic/workspace/memory/\`: evolving AI-maintained understanding
+- \`.agentic/workspace/documents/\`: polished markdown outputs
+
+## Workspace Semantics
+
+### Project
+
+Use \`.agentic/workspace/project/\` for:
+
+- Figma screenshots
+- requirement notes
+- requirement documents
+- links captured into markdown files
+- user-supplied project references
+
+### Memory
+
+Use \`.agentic/workspace/memory/\` for:
+
+- \`project-overview.md\`
+- \`requirements.md\`
+- \`open-questions.md\`
+- \`architecture.md\`
+- assumptions and structured working memory
+
+### Documents
+
+Use \`.agentic/workspace/documents/\` for polished outputs:
+
+- \`brd.md\`
+- \`frd.md\`
+- \`estimate.md\`
+- \`proposal.md\`
+
+## Working Rules
+
+1. Reuse and improve existing workspace files when they already exist.
+2. Do not scan the whole repository unless the user explicitly asks.
+3. Ask only the minimum blocking questions required to continue.
+4. Always end by telling the user the exact next command to run.
 `,
-    ".agentic/init.md": `# Init
+  ".agentic/commands/project-requirements.md": `# Project Requirements
 
-You are bootstrapping this project workspace.
+Read:
+
+- \`@.agentic/context.md\`
+- relevant existing files inside \`.agentic/workspace/project/\`
+- \`.agentic/workspace/memory/project-overview.md\` if it exists
+- \`.agentic/workspace/memory/requirements.md\` if it exists
+- \`.agentic/workspace/memory/open-questions.md\` if it exists
 
 ## Your job
 
-1. Read \`@.agentic/context.md\`.
-2. Scan the full \`.agentic/workspace/\` directory and summarize what already exists.
-3. Inspect \`.agentic/workspace/requirements/\` for screenshots, requirement notes, references, or client material.
-4. If \`.agentic/workspace/analysis/project-overview.md\` already exists, review and improve it instead of replacing useful content.
-5. If \`.agentic/workspace/analysis/architecture.md\` already exists, review and improve it instead of replacing useful content.
-6. Ask the user only for information that is truly missing and blocks accurate analysis.
-7. Create or update \`.agentic/workspace/analysis/project-overview.md\` with:
-   - project summary
-   - goals
-   - users or stakeholders
-   - major modules
-   - assumptions
-   - risks
-   - open questions
-8. Create or update \`.agentic/workspace/analysis/architecture.md\` with an initial architecture direction if enough information exists.
-9. End with a concise summary of what you found, what you created or updated, and tell the user:
-
-\`Next type @.agentic/instructions/01-project-understanding.md\`
-`,
-    ".agentic/context.md": `# Context Map
-
-This repository is scaffolded for an AI-assisted delivery workflow.
-
-## Paths
-
-- \`.agentic/init.md\`: first prompt to run in a new chat.
-- \`.agentic/context.md\`: shared map every step should read before doing work.
-- \`.agentic/instructions/\`: ordered step prompts.
-- \`.agentic/workspace/requirements/\`: source inputs from client, discovery, screenshots, notes, and references.
-- \`.agentic/workspace/requirements/figma-screenshots/\`: raw Figma screenshots dropped by the team.
-- \`.agentic/workspace/analysis/\`: generated markdown outputs such as project understanding, architecture, BRD drafts, FRD drafts, and estimation notes.
-- \`.agentic/workspace/documents/\`: exported deliverables such as \`.docx\`, \`.xlsx\`, or PDFs.
-- \`.agentic/workspace/code/\`: implementation area for frontend, backend, shared packages, and related codebases.
-- \`.agentic/workspace/scripts/\`: helper generators such as BRD or estimation export scripts.
-
-## Working rules
-
-1. Always read this file before executing an instruction step.
-2. Reuse and improve existing files when present instead of blindly overwriting good work.
-3. Save outputs only in the folders described above.
-4. At the end of every step, tell the user the exact next prompt to run.
-`,
-    ".agentic/instructions/01-project-understanding.md": `# Step 01: Project Understanding
-
-Read:
-
-- \`@.agentic/context.md\`
-- \`@.agentic/workspace/analysis/project-overview.md\` if it exists
-- everything relevant inside \`@.agentic/workspace/requirements/\`
-
-Your job:
-
-1. Build a clear understanding of the project scope from the available inputs.
-2. Identify business goal, target users, core workflows, major features, dependencies, constraints, assumptions, and risks.
-3. Update or create \`.agentic/workspace/analysis/project-overview.md\` as a polished project-understanding document.
-4. Keep the document practical and client-ready.
-5. If information is missing, ask only the minimum blocking questions.
-
-Output file:
-
-- \`.agentic/workspace/analysis/project-overview.md\`
+1. Collect the project explanation, goals, users, scope, screenshots, references, and known deliverables.
+2. Accept either:
+   - existing file paths already shared by the user, or
+   - fresh explanation typed in chat
+3. Tell the user where each input belongs under \`.agentic/workspace/project/\`.
+4. Create or update:
+   - \`.agentic/workspace/memory/project-overview.md\`
+   - \`.agentic/workspace/memory/requirements.md\`
+   - \`.agentic/workspace/memory/open-questions.md\`
+5. Capture assumptions separately from confirmed facts.
+6. Ask only for missing details that block useful requirement understanding.
 
 When done, tell the user:
 
-\`Next type @.agentic/instructions/02-architecture.md\`
+\`Next type @.agentic/commands/architecture.md\`
 `,
-    ".agentic/instructions/02-architecture.md": `# Step 02: Architecture
+  ".agentic/commands/architecture.md": `# Architecture
 
 Read:
 
 - \`@.agentic/context.md\`
-- \`@.agentic/workspace/analysis/project-overview.md\`
-- any relevant requirement material in \`@.agentic/workspace/requirements/\`
+- \`.agentic/workspace/memory/project-overview.md\`
+- \`.agentic/workspace/memory/requirements.md\`
+- relevant files under \`.agentic/workspace/project/\`
+- \`.agentic/workspace/memory/open-questions.md\` if it exists
 
-Your job:
+## Your job
 
-1. Define the recommended system architecture for this project.
-2. Cover frontend, backend, data, integrations, authentication, deployment, observability, and security where relevant.
-3. Include a mermaid diagram if the AI tool supports it.
-4. Update or create \`.agentic/workspace/analysis/architecture.md\`.
-5. Keep it implementation-oriented and aligned with the project scope.
-
-Output file:
-
-- \`.agentic/workspace/analysis/architecture.md\`
+1. Produce or update \`.agentic/workspace/memory/architecture.md\`.
+2. Explain the recommended system architecture based on the known requirements.
+3. Cover frontend, backend, data, integrations, authentication, deployment, and key risks when relevant.
+4. Add a diagram description or mermaid diagram when supported.
+5. Mention draw.io MCP only as an optional tool if available in the user's environment.
+6. Ask only the minimum blocking questions.
 
 When done, tell the user:
 
-\`Next type @.agentic/instructions/03-brd.md\`
+\`Next type @.agentic/commands/create-brd.md\`
 `,
-    ".agentic/instructions/03-brd.md": `# Step 03: BRD
+  ".agentic/commands/create-brd.md": `# Create BRD
 
 Read:
 
 - \`@.agentic/context.md\`
-- \`@.agentic/workspace/analysis/project-overview.md\`
-- \`@.agentic/workspace/analysis/architecture.md\`
-- any supporting requirement files in \`@.agentic/workspace/requirements/\`
+- \`.agentic/workspace/memory/project-overview.md\`
+- \`.agentic/workspace/memory/requirements.md\`
+- \`.agentic/workspace/memory/architecture.md\`
+- relevant files under \`.agentic/workspace/project/\`
 
-Your job:
+## Your job
 
-1. Create a Business Requirements Document based on the available context.
-2. Cover executive summary, business goals, problem statement, users, scope, assumptions, dependencies, risks, milestones, and acceptance framing.
-3. Save the markdown draft to \`.agentic/workspace/analysis/brd.md\`.
-4. If a generator script exists in \`.agentic/workspace/scripts/\`, mention whether it can be used to export a \`.docx\` into \`.agentic/workspace/documents/\`.
-
-Output file:
-
-- \`.agentic/workspace/analysis/brd.md\`
+1. Create or update \`.agentic/workspace/documents/brd.md\`.
+2. Produce a polished markdown Business Requirements Document.
+3. Use confirmed facts first and clearly label assumptions where needed.
+4. If critical information is missing, ask only the minimum blocking questions before drafting.
 
 When done, tell the user:
 
-\`Next type @.agentic/instructions/04-frd.md\`
+\`Next type @.agentic/commands/create-frd.md\`
 `,
-    ".agentic/instructions/04-frd.md": `# Step 04: FRD
+  ".agentic/commands/create-frd.md": `# Create FRD
 
 Read:
 
 - \`@.agentic/context.md\`
-- \`@.agentic/workspace/analysis/project-overview.md\`
-- \`@.agentic/workspace/analysis/architecture.md\`
-- \`@.agentic/workspace/analysis/brd.md\`
-- any supporting requirement files in \`@.agentic/workspace/requirements/\`
+- \`.agentic/workspace/memory/project-overview.md\`
+- \`.agentic/workspace/memory/requirements.md\`
+- \`.agentic/workspace/memory/architecture.md\`
+- \`.agentic/workspace/documents/brd.md\` if it exists
+- relevant files under \`.agentic/workspace/project/\`
 
-Your job:
+## Your job
 
-1. Create a Functional Requirements Document with feature-level detail.
-2. Cover modules, user flows, functional requirements, validations, edge cases, roles, permissions, reporting needs, and non-functional considerations where relevant.
-3. Save the markdown draft to \`.agentic/workspace/analysis/frd.md\`.
-4. Keep the structure ready for handoff to product, design, and engineering teams.
-
-Output file:
-
-- \`.agentic/workspace/analysis/frd.md\`
+1. Create or update \`.agentic/workspace/documents/frd.md\`.
+2. Produce a polished markdown Functional Requirements Document.
+3. Cover modules, flows, validations, roles, and edge cases where relevant.
+4. Ask only the minimum blocking questions.
 
 When done, tell the user:
 
-\`Next type @.agentic/instructions/05-estimation.md\`
+\`Next type @.agentic/commands/create-estimate.md\`
 `,
-    ".agentic/instructions/05-estimation.md": `# Step 05: Estimation
+  ".agentic/commands/create-estimate.md": `# Create Estimate
 
 Read:
 
 - \`@.agentic/context.md\`
-- \`@.agentic/workspace/analysis/project-overview.md\`
-- \`@.agentic/workspace/analysis/architecture.md\`
-- \`@.agentic/workspace/analysis/brd.md\`
-- \`@.agentic/workspace/analysis/frd.md\`
+- \`.agentic/workspace/memory/project-overview.md\`
+- \`.agentic/workspace/memory/requirements.md\`
+- \`.agentic/workspace/memory/architecture.md\`
+- \`.agentic/workspace/documents/brd.md\` if it exists
+- \`.agentic/workspace/documents/frd.md\` if it exists
 
-Your job:
+## Your job
 
-1. Create a delivery estimation based on the full project context.
-2. Break effort down by module, role, and phase where possible.
-3. Include assumptions, dependencies, delivery risks, and scope sensitivity.
-4. Save the markdown draft to \`.agentic/workspace/analysis/estimation.md\`.
-5. If the workspace includes generator scripts, mention whether the estimate can be exported into \`.agentic/workspace/documents/\`.
+1. Create or update \`.agentic/workspace/documents/estimate.md\`.
+2. Produce a markdown estimate with effort breakdown, assumptions, dependencies, and risks.
+3. Keep the estimate aligned with the known scope and clearly state uncertainty.
+4. Ask only the minimum blocking questions.
 
-Output file:
+When done, tell the user:
 
-- \`.agentic/workspace/analysis/estimation.md\`
-
-When done, tell the user the workflow is complete and list the generated outputs.
+\`Next type @.agentic/commands/create-proposal.md\`
 `,
-  };
-};
+  ".agentic/commands/create-proposal.md": `# Create Proposal
+
+Read:
+
+- \`@.agentic/context.md\`
+- \`.agentic/workspace/memory/project-overview.md\`
+- \`.agentic/workspace/memory/requirements.md\`
+- \`.agentic/workspace/memory/architecture.md\`
+- \`.agentic/workspace/documents/brd.md\` if it exists
+- \`.agentic/workspace/documents/frd.md\` if it exists
+- \`.agentic/workspace/documents/estimate.md\` if it exists
+
+## Your job
+
+1. Create or update \`.agentic/workspace/documents/proposal.md\`.
+2. Produce a polished markdown proposal using the known scope, architecture direction, and estimate.
+3. Make gaps explicit instead of inventing details.
+4. Ask only the minimum blocking questions.
+
+When done, tell the user the v1 workflow is complete and list the generated files.
+`,
+});
 
 const directories = [
   ".agentic",
-  ".agentic/instructions",
+  ".agentic/commands",
   ".agentic/workspace",
-  ".agentic/workspace/requirements",
-  ".agentic/workspace/requirements/figma-screenshots",
-  ".agentic/workspace/analysis",
+  ".agentic/workspace/project",
+  ".agentic/workspace/memory",
   ".agentic/workspace/documents",
-  ".agentic/workspace/code",
-  ".agentic/workspace/scripts",
 ];
 
 async function resetGeneratedPaths(cwd: string) {
@@ -254,7 +293,7 @@ async function createDirectories(cwd: string) {
 }
 
 async function writeScaffoldFiles(cwd: string) {
-  const files = fileContents(cwd);
+  const files = fileContents();
 
   await Promise.all(
     Object.entries(files).map(([relativePath, content]) =>
@@ -275,9 +314,8 @@ async function main() {
   console.log(`Project folder: ${cwd}`);
   console.log("");
   console.log("Next steps:");
-  console.log("1. Add screenshots to .agentic/workspace/requirements/figma-screenshots/");
-  console.log("2. Open your AI tool in this folder.");
-  console.log("3. Start a new chat with @.agentic/init.md");
+  console.log("1. Open your AI tool in this folder.");
+  console.log("2. Start a new chat with @.agentic/init.md");
   console.log("");
 }
 
