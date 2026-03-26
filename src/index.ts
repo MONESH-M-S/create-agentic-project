@@ -4,12 +4,9 @@ import path from "node:path";
 type FileMap = Record<string, string>;
 
 const AGENTS_PATH = "AGENTS.md";
-const README_PATH = "README.md";
 const GITIGNORE_PATH = ".gitignore";
 const AGENTS_MARKER_START = "<!-- from create-agentic-starter:agents:start -->";
 const AGENTS_MARKER_END = "<!-- from create-agentic-starter:agents:end -->";
-const README_MARKER_START = "<!-- from create-agentic-starter:start -->";
-const README_MARKER_END = "<!-- from create-agentic-starter:end -->";
 const GITIGNORE_MARKER_START = "# from create-agentic-starter:start";
 const GITIGNORE_MARKER_END = "# from create-agentic-starter:end";
 
@@ -20,7 +17,7 @@ const fileContents = (): FileMap => ({
 
 Read \`@.agentic/context.md\` first.
 
-You are starting a fresh AI session inside this project. Your job is to build lightweight orientation without over-reading the repository.
+You are starting a fresh AI session inside this project. Your job is to quickly understand what this project is, what context already exists, and what the user still needs to provide.
 
 ## Read Scope
 
@@ -32,18 +29,39 @@ You are starting a fresh AI session inside this project. Your job is to build li
    - inspect \`.agentic/workspace/documents/\`
 4. Use existing workspace context if it is already present.
 
+## Response Style
+
+1. Be concise and synthesis-first.
+2. Do not dump a full file inventory unless the user explicitly asks.
+3. Do not mirror the prompt structure back to the user.
+4. Respond with either:
+   - a short synthesized summary of what you understand, or
+   - a few focused questions if important context is still missing
+
 ## What To Do
 
-1. Summarize the root-level project structure.
-2. Summarize what already exists in \`.agentic/workspace/project/\`, \`.agentic/workspace/memory/\`, and \`.agentic/workspace/documents/\`.
-3. Build a lightweight understanding from:
-   - root-level structure
+1. Infer what kind of project this is from the root-level signals.
+2. Check whether \`.agentic/workspace/project/\`, \`.agentic/workspace/memory/\`, and \`.agentic/workspace/documents/\` already contain useful context.
+3. Build the best current understanding from:
+   - root-level signals
    - existing workspace files
    - the user's message in this chat
-4. If the user mentions screenshots, notes, requirement docs, links, or file paths, tell them how those should be placed or referenced under \`.agentic/workspace/project/\`.
-5. If project materials are missing, say what would be useful to add, but continue with what you can understand already.
-6. Ask only blocking clarification questions.
-7. End with:
+4. If project context is thin, ask a small number of targeted questions about:
+   - project goal
+   - target users
+   - scope or modules
+   - available references such as screenshots, docs, notes, links, or file paths
+   - desired outputs
+5. If enough context exists, give a short summary of the project and the most important missing pieces.
+6. If the user mentions screenshots, notes, requirement docs, links, or file paths, tell them how those should be placed or referenced under \`.agentic/workspace/project/\`.
+7. After the first useful exchange, create or update:
+   - \`.agentic/workspace/memory/project-overview.md\`
+   - \`.agentic/workspace/memory/requirements.md\`
+   - \`.agentic/workspace/memory/open-questions.md\`
+8. Write drafts even from partial information.
+9. Clearly separate confirmed facts, assumptions, and open questions.
+10. Do not route immediately just because the workspace is empty. Do useful synthesis or ask focused questions first.
+11. Once you have done useful intake work, end with:
 
 \`Next type @.agentic/commands/project-requirements.md\`
 `,
@@ -110,17 +128,20 @@ Read:
 
 ## Your job
 
-1. Collect the project explanation, goals, users, scope, screenshots, references, and known deliverables.
-2. Accept either:
+1. Refine and deepen the initial understanding created during \`@.agentic/init.md\`.
+2. Collect any missing project explanation, goals, users, scope, screenshots, references, and known deliverables.
+3. Accept either:
    - existing file paths already shared by the user, or
    - fresh explanation typed in chat
-3. Tell the user where each input belongs under \`.agentic/workspace/project/\`.
-4. Create or update:
+4. Tell the user where each input belongs under \`.agentic/workspace/project/\`.
+5. Organize and normalize the project context so the later architecture and document steps can rely on it.
+6. Create or update:
    - \`.agentic/workspace/memory/project-overview.md\`
    - \`.agentic/workspace/memory/requirements.md\`
    - \`.agentic/workspace/memory/open-questions.md\`
-5. Capture assumptions separately from confirmed facts.
-6. Ask only for missing details that block useful requirement understanding.
+7. Capture assumptions separately from confirmed facts.
+8. Reduce open questions where possible before handing off to architecture.
+9. Ask only for missing details that block useful requirement understanding.
 
 When done, tell the user:
 
@@ -279,27 +300,6 @@ If your tool does not support \`@file\` references, paste the contents of the pr
 ${AGENTS_MARKER_END}
 `;
 
-const readmeBlock = `${README_MARKER_START}
-## Agentic Starter
-
-This project includes a reusable AI workflow scaffold under \`.agentic/\`.
-
-Start every new AI session with:
-
-\`@.agentic/init.md\`
-
-Command flow:
-
-1. \`@.agentic/init.md\`
-2. \`@.agentic/commands/project-requirements.md\`
-3. \`@.agentic/commands/architecture.md\`
-4. \`@.agentic/commands/create-brd.md\`
-5. \`@.agentic/commands/create-frd.md\`
-6. \`@.agentic/commands/create-estimate.md\`
-7. \`@.agentic/commands/create-proposal.md\`
-${README_MARKER_END}
-`;
-
 const gitignoreBlock = `${GITIGNORE_MARKER_START}
 .agentic/workspace/documents/
 .agentic/workspace/memory/
@@ -396,13 +396,6 @@ async function main() {
     agentsBlock,
     AGENTS_MARKER_START,
     AGENTS_MARKER_END,
-  );
-  await upsertOptionalFile(
-    cwd,
-    README_PATH,
-    readmeBlock,
-    README_MARKER_START,
-    README_MARKER_END,
   );
   await upsertOptionalFile(
     cwd,

@@ -28,8 +28,8 @@ Run the command inside an existing project folder.
 The scaffold is non-interactive. It will:
 
 - recreate `.agentic/`
-- recreate `AGENTS.md`
-- preserve existing `README.md` and `.gitignore`, appending a marked `create-agentic-starter` section at the end
+- preserve existing `AGENTS.md` and `.gitignore`, appending a marked `create-agentic-starter` section when needed
+- never modify `README.md`
 - print the next step for the team
 
 ## Generated Structure
