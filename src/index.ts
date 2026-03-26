@@ -3,58 +3,19 @@ import path from "node:path";
 
 type FileMap = Record<string, string>;
 
+const AGENTS_PATH = "AGENTS.md";
 const README_PATH = "README.md";
 const GITIGNORE_PATH = ".gitignore";
+const AGENTS_MARKER_START = "<!-- from create-agentic-starter:agents:start -->";
+const AGENTS_MARKER_END = "<!-- from create-agentic-starter:agents:end -->";
 const README_MARKER_START = "<!-- from create-agentic-starter:start -->";
 const README_MARKER_END = "<!-- from create-agentic-starter:end -->";
 const GITIGNORE_MARKER_START = "# from create-agentic-starter:start";
 const GITIGNORE_MARKER_END = "# from create-agentic-starter:end";
 
-const RESET_PATHS = [
-  ".agentic",
-  "AGENTS.md",
-];
+const RESET_PATHS = [".agentic"];
 
 const fileContents = (): FileMap => ({
-  "AGENTS.md": `# Agentic Starter Guide
-
-This scaffold creates a reusable AI working area under \`.agentic/\` for project kick-off and pre-delivery documentation.
-
-## What This Is For
-
-Use this scaffold when you want an AI tool to:
-
-- understand a project from files, notes, screenshots, and links
-- maintain structured project memory
-- generate markdown deliverables such as BRD, FRD, estimate, and proposal
-
-## Folder Purpose
-
-- \`.agentic/init.md\`: first prompt for every new AI session
-- \`.agentic/context.md\`: shared rules and folder map
-- \`.agentic/commands/\`: task-specific prompt files you reference in your AI tool
-- \`.agentic/workspace/project/\`: raw project inputs such as screenshots, notes, requirement docs, and reference links
-- \`.agentic/workspace/memory/\`: evolving AI-maintained project understanding
-- \`.agentic/workspace/documents/\`: polished markdown deliverables
-
-## How To Use It
-
-1. Open your AI tool in this project.
-2. Start every new session with \`@.agentic/init.md\`.
-3. Follow the command sequence below.
-
-## V1 Command Sequence
-
-1. \`@.agentic/init.md\`
-2. \`@.agentic/commands/project-requirements.md\`
-3. \`@.agentic/commands/architecture.md\`
-4. \`@.agentic/commands/create-brd.md\`
-5. \`@.agentic/commands/create-frd.md\`
-6. \`@.agentic/commands/create-estimate.md\`
-7. \`@.agentic/commands/create-proposal.md\`
-
-If your tool does not support \`@file\` references, paste the contents of the prompt file into a new chat manually.
-`,
   ".agentic/init.md": `# Init
 
 Read \`@.agentic/context.md\` first.
@@ -276,6 +237,48 @@ When done, tell the user the v1 workflow is complete and list the generated file
 `,
 });
 
+const agentsBlock = `${AGENTS_MARKER_START}
+# Agentic Starter Guide
+
+This project includes a reusable AI working area under \`.agentic/\` for project kick-off and pre-delivery documentation.
+
+## What This Is For
+
+Use this scaffold when you want an AI tool to:
+
+- understand a project from files, notes, screenshots, and links
+- maintain structured project memory
+- generate markdown deliverables such as BRD, FRD, estimate, and proposal
+
+## Folder Purpose
+
+- \`.agentic/init.md\`: first prompt for every new AI session
+- \`.agentic/context.md\`: shared rules and folder map
+- \`.agentic/commands/\`: task-specific prompt files you reference in your AI tool
+- \`.agentic/workspace/project/\`: raw project inputs such as screenshots, notes, requirement docs, and reference links
+- \`.agentic/workspace/memory/\`: evolving AI-maintained project understanding
+- \`.agentic/workspace/documents/\`: polished markdown deliverables
+
+## How To Use It
+
+1. Open your AI tool in this project.
+2. Start every new session with \`@.agentic/init.md\`.
+3. Follow the command sequence below.
+
+## V1 Command Sequence
+
+1. \`@.agentic/init.md\`
+2. \`@.agentic/commands/project-requirements.md\`
+3. \`@.agentic/commands/architecture.md\`
+4. \`@.agentic/commands/create-brd.md\`
+5. \`@.agentic/commands/create-frd.md\`
+6. \`@.agentic/commands/create-estimate.md\`
+7. \`@.agentic/commands/create-proposal.md\`
+
+If your tool does not support \`@file\` references, paste the contents of the prompt file into a new chat manually.
+${AGENTS_MARKER_END}
+`;
+
 const readmeBlock = `${README_MARKER_START}
 ## Agentic Starter
 
@@ -387,6 +390,13 @@ async function main() {
   await resetGeneratedPaths(cwd);
   await createDirectories(cwd);
   await writeScaffoldFiles(cwd);
+  await upsertOptionalFile(
+    cwd,
+    AGENTS_PATH,
+    agentsBlock,
+    AGENTS_MARKER_START,
+    AGENTS_MARKER_END,
+  );
   await upsertOptionalFile(
     cwd,
     README_PATH,
