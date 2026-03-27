@@ -28,7 +28,7 @@ Read:
 13. If execution detail is missing, ask focused questions and keep refining instead of routing.
 14. If the user explicitly asked for this task planning work, continue it directly using the existing workspace context instead of routing them backward.
 
-When the tasks are complete enough, tell the user the available next options:
+When the tasks are complete enough, tell the user the available next options, and also make it clear they can ask for something else by saying what they want to do next.
 
 - `@.agentic/commands/create-plan.md`
 - `@.agentic/commands/create-proposal.md`

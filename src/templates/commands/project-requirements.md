@@ -27,7 +27,7 @@ Read:
 10. Only ask for missing details that block useful requirement understanding.
 11. If the user has already asked for a later deliverable and the existing context is sufficient, acknowledge that and let them move there instead of forcing this step.
 
-When the requirements are strong enough, tell the user the available next options:
+When the requirements are strong enough, tell the user the available next options, and also make it clear they can ask for something else by saying what they want to do next.
 
 - `@.agentic/commands/architecture.md` (recommended)
 - `@.agentic/commands/create-plan.md`

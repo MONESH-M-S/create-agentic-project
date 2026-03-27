@@ -27,6 +27,6 @@ Read:
 14. Ask only the minimum blocking questions.
 15. If the user explicitly asked for this estimate work, continue it directly using the existing workspace context instead of routing them backward.
 
-When the estimate is strong enough for proposal drafting, tell the user:
+When the estimate is strong enough for proposal drafting, recommend the next command and also make it clear the user can say what they want to do now:
 
 `Next type @.agentic/commands/create-proposal.md`

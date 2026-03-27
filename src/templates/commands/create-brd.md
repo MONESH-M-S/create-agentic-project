@@ -25,6 +25,6 @@ Read:
 13. If critical information is missing, ask only the minimum blocking questions and keep improving the BRD draft instead of routing yet.
 14. If the user explicitly asked for this BRD work, continue it directly using the existing workspace context instead of routing them backward.
 
-When the BRD is solid enough to define functional requirements, tell the user:
+When the BRD is solid enough to define functional requirements, recommend the next command and also make it clear the user can say what they want to do now:
 
 `Next type @.agentic/commands/create-frd.md`

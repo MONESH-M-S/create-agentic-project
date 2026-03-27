@@ -25,6 +25,6 @@ Read:
 12. Ask only the minimum blocking questions.
 13. If the user explicitly asked for this FRD work, continue it directly using the existing workspace context instead of routing them backward.
 
-When the FRD is strong enough for estimation, tell the user:
+When the FRD is strong enough for estimation, recommend the next command and also make it clear the user can say what they want to do now:
 
 `Next type @.agentic/commands/create-estimate.md`

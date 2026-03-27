@@ -20,7 +20,7 @@ Read:
 8. Ask only the minimum blocking questions.
 9. If the user directly asks for a downstream deliverable and the architecture context is already sufficient, let them continue there instead of forcing this step to repeat.
 
-When the architecture is strong enough, tell the user the available next options:
+When the architecture is strong enough, tell the user the available next options, and also make it clear they can ask for something else by saying what they want to do next.
 
 - `@.agentic/commands/create-brd.md`
 - `@.agentic/commands/create-proposal.md`

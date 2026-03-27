@@ -65,6 +65,6 @@ You are starting a fresh AI session inside this project. Your job is to quickly 
    - if BRD work already exists, also allow `@.agentic/commands/create-frd.md`
    - if FRD work already exists, also allow `@.agentic/commands/create-estimate.md`
    - if estimate work already exists, also allow `@.agentic/commands/create-proposal.md`
-18. Only when you have done enough useful intake work for a first-time project, end with:
+18. Only when you have done enough useful intake work for a first-time project, end by recommending the next command and also make it clear the user can say what they want to do now:
 
 `Next type @.agentic/commands/project-requirements.md`

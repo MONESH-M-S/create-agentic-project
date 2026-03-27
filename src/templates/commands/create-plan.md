@@ -30,7 +30,7 @@ Read:
 14. If planning inputs are missing, ask focused questions and keep refining instead of routing.
 15. If the user explicitly asked for this plan work, continue it directly using the existing workspace context instead of routing them backward.
 
-When the plan is complete enough, tell the user the available next options:
+When the plan is complete enough, tell the user the available next options, and also make it clear they can ask for something else by saying what they want to do next.
 
 - `@.agentic/commands/architecture.md`
 - `@.agentic/commands/create-tasks.md`
