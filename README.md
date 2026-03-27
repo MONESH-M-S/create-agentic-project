@@ -28,7 +28,9 @@ Run the command inside an existing project folder.
 The scaffold is non-interactive. It will:
 
 - recreate `.agentic/`
-- preserve existing `AGENTS.md` and `.gitignore`, appending a marked `create-agentic-starter` section when needed
+- create `.docs/` for user-facing outputs
+- preserve existing `AGENTS.md`, appending a marked `create-agentic-starter` section when needed
+- never modify `.gitignore`
 - never modify `README.md`
 - print the next step for the team
 
@@ -42,6 +44,8 @@ The command sets up:
 - `.agentic/workspace/project/`
 - `.agentic/workspace/memory/`
 - `.agentic/workspace/documents/`
+- `.agentic/workspace/scripts/`
+- `.docs/`
 - `AGENTS.md`
 
 ## First Run Flow

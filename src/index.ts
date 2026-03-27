@@ -6,11 +6,7 @@ import {
   AGENTS_MARKER_END,
   AGENTS_MARKER_START,
   AGENTS_PATH,
-  GITIGNORE_MARKER_END,
-  GITIGNORE_MARKER_START,
-  GITIGNORE_PATH,
   agentsBlock,
-  gitignoreBlock,
 } from "./managed-files.js";
 import { DIRECTORIES, RESET_PATHS, fileContents } from "./scaffold.js";
 
@@ -50,13 +46,6 @@ async function main() {
     agentsBlock,
     AGENTS_MARKER_START,
     AGENTS_MARKER_END,
-  );
-  await upsertOptionalFile(
-    cwd,
-    GITIGNORE_PATH,
-    gitignoreBlock,
-    GITIGNORE_MARKER_START,
-    GITIGNORE_MARKER_END,
   );
 
   console.log("");
