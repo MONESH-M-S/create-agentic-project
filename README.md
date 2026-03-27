@@ -9,7 +9,7 @@ It is meant for teams who repeatedly do the same early project work:
 - define architecture
 - prepare BRD, FRD, estimate, proposal, plan, and task outputs
 
-Instead of rebuilding prompts, folders, and working conventions for every new project, this package gives the team a standard `.agentic/` setup that works across AI tools such as Codex, Claude, Cursor, Zed, and similar agentic workflows.
+Instead of rebuilding prompts, folders, and working conventions for every new project, this package gives the team a standard `.agentic/` setup that works across AI tools such as Codex, Claude, Cursor, Antigravity, and similar agentic workflows.
 
 ## What This Project Is Trying To Achieve
 
@@ -47,8 +47,6 @@ When you run it, it will:
 - recreate `.agentic/`
 - create `.docs/` for user-facing outputs
 - preserve an existing `AGENTS.md` and append a marked `create-agentic-starter` section when needed
-- never modify `.gitignore`
-- never modify `README.md`
 - print the next step for the team: start with `@.agentic/init.md`
 
 ## What Gets Created
@@ -72,6 +70,17 @@ This gives you a clear split:
 - `.agentic/workspace/documents/` for internal drafts and structured export input
 - `.agentic/workspace/scripts/` for starter export scripts
 - `.docs/` for final user-facing outputs
+
+## Customization
+
+The generated scaffold is fully yours after it is created.
+
+- you can add any new prompt files you want under `.agentic/commands/`
+- you can edit the existing prompts to match your workflow
+- you can remove commands, files, or folders that you do not want
+- you can version control everything with git inside your own repository
+
+This setup stays inside your codebase. Your project memory, prompts, documents, and scripts live in your repo, so the working context is owned by your team and does not need to live in an external shared system.
 
 ## Export Scripts
 
