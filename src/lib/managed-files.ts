@@ -28,7 +28,7 @@ Use this scaffold when you want an AI tool to:
 - \`.agentic/workspace/project/\`: raw project inputs such as screenshots, notes, requirement docs, and references
 - \`.agentic/workspace/memory/\`: evolving AI-maintained project understanding
 - \`.agentic/workspace/documents/\`: internal drafts and intermediate artifacts
-- \`.agentic/workspace/scripts/\`: optional Node export helpers
+- \`.agentic/workspace/scripts/\`: starter Node export helpers that can be adapted per project
 - \`.docs/\`: user-facing deliverables
 
 ## How To Use It
@@ -63,7 +63,9 @@ Default user-facing outputs live under \`.docs/\`:
 
 ## Export Helpers
 
-Optional export scripts can live under \`.agentic/workspace/scripts/\`.
+Starter export scripts live under \`.agentic/workspace/scripts/\`.
+
+Adapt the relevant script when the project needs a custom template or style. Keep the script path stable by default instead of inventing a separate export path.
 
 Dependency guidance:
 

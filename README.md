@@ -48,6 +48,14 @@ The command sets up:
 - `.docs/`
 - `AGENTS.md`
 
+The scaffold also includes starter export scripts under `.agentic/workspace/scripts/` for:
+
+- `.docx` via `docx`
+- `.pptx` via `pptxgenjs`
+- `.xlsx` via `exceljs`
+
+Those scripts are meant to be adapted per project when the user provides a specific template or output style.
+
 ## First Run Flow
 
 After scaffolding:

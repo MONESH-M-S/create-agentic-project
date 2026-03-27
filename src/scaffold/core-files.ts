@@ -1,4 +1,4 @@
-import type { FileMap } from "./scaffold.js";
+import type { FileMap } from "./index.js";
 
 export const coreFiles: FileMap = {
   ".agentic/init.md": `# Init
@@ -103,10 +103,13 @@ Use \`.agentic/workspace/documents/\` for internal drafts or intermediate artifa
 - draft proposal content
 - draft plan content
 - draft task breakdowns
+- structured export input such as \`brd.json\`, \`frd.json\`, \`estimate.json\`, \`proposal.json\`, \`plan.json\`, and \`tasks.json\`
 
 ### Scripts
 
-Use \`.agentic/workspace/scripts/\` for optional Node.js export helpers.
+Use \`.agentic/workspace/scripts/\` for Node.js export helpers.
+
+Starter scripts are scaffolded there by default. Update the relevant script for the current project when the user provides a custom template, layout, or style requirement.
 
 Planned library stack:
 

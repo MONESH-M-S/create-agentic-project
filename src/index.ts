@@ -1,14 +1,14 @@
 import { mkdir, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
 
-import { upsertOptionalFile } from "./file-utils.js";
+import { upsertOptionalFile } from "./lib/file-utils.js";
 import {
   AGENTS_MARKER_END,
   AGENTS_MARKER_START,
   AGENTS_PATH,
   agentsBlock,
-} from "./managed-files.js";
-import { DIRECTORIES, RESET_PATHS, fileContents } from "./scaffold.js";
+} from "./lib/managed-files.js";
+import { DIRECTORIES, RESET_PATHS, fileContents } from "./scaffold/index.js";
 
 async function resetGeneratedPaths(cwd: string) {
   await Promise.all(

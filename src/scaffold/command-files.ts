@@ -1,4 +1,4 @@
-import type { FileMap } from "./scaffold.js";
+import type { FileMap } from "./index.js";
 
 export const commandFiles: FileMap = {
   ".agentic/commands/project-requirements.md": `# Project Requirements
@@ -63,7 +63,7 @@ When the architecture is strong enough, tell the user the available next options
 - \`@.agentic/commands/create-plan.md\`
 - \`@.agentic/commands/create-tasks.md\`
 `,
-  ".agentic/commands/create-brd.md": `# Create BRD
+ ".agentic/commands/create-brd.md": `# Create BRD
 
 Read:
 
@@ -75,24 +75,25 @@ Read:
 
 ## Your job
 
-1. Maintain any internal draft content under \`.agentic/workspace/documents/brd.*\` if useful.
+1. Maintain any internal draft content under \`.agentic/workspace/documents/brd.md\` and structured export input under \`.agentic/workspace/documents/brd.json\` if useful.
 2. Produce the user-facing BRD at \`.docs/brd/brd.docx\`.
-3. Assume Node.js export scripts will later convert structured content and templates into the final \`.docx\`.
+3. Use or update the starter script at \`.agentic/workspace/scripts/generate_brd.js\` when export automation is needed.
 4. If the user already provided a template file/path/reference, follow it.
 5. Otherwise ask whether they want a specific BRD style or structure.
-6. If neither a template nor a style is provided, use the built-in default structure.
+6. If neither a template nor a style is provided, use the built-in default structure and starter script shape.
 7. If export dependencies are needed, first check whether the target project root already has a usable Node environment.
 8. Prefer the project root if it is suitable; otherwise ask the user which path should receive the install.
 9. Ask the user before running any \`npm install\`.
 10. Use confirmed facts first and clearly label assumptions where needed.
-11. If relevant source material is outside \`.agentic/workspace/project/\`, move or organize it into the workspace by default unless the user explicitly says not to.
-12. If critical information is missing, ask only the minimum blocking questions and keep improving the BRD draft instead of routing yet.
+11. If the project's template or style requires different export logic, update \`.agentic/workspace/scripts/generate_brd.js\` instead of inventing a separate export path by default.
+12. If relevant source material is outside \`.agentic/workspace/project/\`, move or organize it into the workspace by default unless the user explicitly says not to.
+13. If critical information is missing, ask only the minimum blocking questions and keep improving the BRD draft instead of routing yet.
 
 When the BRD is solid enough to define functional requirements, tell the user:
 
 \`Next type @.agentic/commands/create-frd.md\`
 `,
-  ".agentic/commands/create-frd.md": `# Create FRD
+ ".agentic/commands/create-frd.md": `# Create FRD
 
 Read:
 
@@ -105,23 +106,24 @@ Read:
 
 ## Your job
 
-1. Maintain any internal draft content under \`.agentic/workspace/documents/frd.*\` if useful.
+1. Maintain any internal draft content under \`.agentic/workspace/documents/frd.md\` and structured export input under \`.agentic/workspace/documents/frd.json\` if useful.
 2. Produce the user-facing FRD at \`.docs/frd/frd.docx\`.
-3. Assume Node.js export scripts will later convert structured content into the final \`.docx\`.
+3. Use or update the starter script at \`.agentic/workspace/scripts/generate_frd.js\` when export automation is needed.
 4. Keep the content behavior straightforward unless the user explicitly supplies a template or style preference.
 5. If export dependencies are needed, first check whether the target project root already has a usable Node environment.
 6. Prefer the project root if it is suitable; otherwise ask the user which path should receive the install.
 7. Ask the user before running any \`npm install\`.
-8. Cover modules, flows, validations, roles, and edge cases where relevant.
-9. If relevant source material is outside \`.agentic/workspace/project/\`, move or organize it into the workspace by default unless the user explicitly says not to.
-10. If important functional details are still missing, ask focused follow-up questions and keep improving the FRD instead of routing yet.
-11. Ask only the minimum blocking questions.
+8. If the project's template or style requires different export logic, update \`.agentic/workspace/scripts/generate_frd.js\` instead of inventing a separate export path by default.
+9. Cover modules, flows, validations, roles, and edge cases where relevant.
+10. If relevant source material is outside \`.agentic/workspace/project/\`, move or organize it into the workspace by default unless the user explicitly says not to.
+11. If important functional details are still missing, ask focused follow-up questions and keep improving the FRD instead of routing yet.
+12. Ask only the minimum blocking questions.
 
 When the FRD is strong enough for estimation, tell the user:
 
 \`Next type @.agentic/commands/create-estimate.md\`
 `,
-  ".agentic/commands/create-estimate.md": `# Create Estimate
+ ".agentic/commands/create-estimate.md": `# Create Estimate
 
 Read:
 
@@ -134,25 +136,26 @@ Read:
 
 ## Your job
 
-1. Maintain any internal draft content under \`.agentic/workspace/documents/estimate.*\` if useful.
+1. Maintain any internal draft content under \`.agentic/workspace/documents/estimate.md\` and structured export input under \`.agentic/workspace/documents/estimate.json\` if useful.
 2. Produce the user-facing estimate at \`.docs/estimate/estimate.xlsx\`.
-3. Assume Node.js export scripts will later convert structured content and templates into the final \`.xlsx\`.
+3. Use or update the starter script at \`.agentic/workspace/scripts/generate_estimate.js\` when export automation is needed.
 4. If the user already provided a template file/path/reference, follow it.
 5. Otherwise ask whether they want a specific estimate style or structure.
-6. If neither a template nor a style is provided, use the built-in default structure.
+6. If neither a template nor a style is provided, use the built-in default structure and starter script shape.
 7. If export dependencies are needed, first check whether the target project root already has a usable Node environment.
 8. Prefer the project root if it is suitable; otherwise ask the user which path should receive the install.
 9. Ask the user before running any \`npm install\`.
-10. Keep the estimate aligned with the known scope and clearly state uncertainty.
-11. If relevant source material is outside \`.agentic/workspace/project/\`, move or organize it into the workspace by default unless the user explicitly says not to.
-12. If the estimate is too uncertain because key delivery information is missing, ask focused follow-up questions and keep refining the estimate instead of routing yet.
-13. Ask only the minimum blocking questions.
+10. If the project's template or style requires different export logic, update \`.agentic/workspace/scripts/generate_estimate.js\` instead of inventing a separate export path by default.
+11. Keep the estimate aligned with the known scope and clearly state uncertainty.
+12. If relevant source material is outside \`.agentic/workspace/project/\`, move or organize it into the workspace by default unless the user explicitly says not to.
+13. If the estimate is too uncertain because key delivery information is missing, ask focused follow-up questions and keep refining the estimate instead of routing yet.
+14. Ask only the minimum blocking questions.
 
 When the estimate is strong enough for proposal drafting, tell the user:
 
 \`Next type @.agentic/commands/create-proposal.md\`
 `,
-  ".agentic/commands/create-proposal.md": `# Create Proposal
+ ".agentic/commands/create-proposal.md": `# Create Proposal
 
 Read:
 
@@ -166,21 +169,22 @@ Read:
 
 ## Your job
 
-1. Maintain any internal draft content under \`.agentic/workspace/documents/proposal.*\` if useful.
+1. Maintain any internal draft content under \`.agentic/workspace/documents/proposal.md\` and structured export input under \`.agentic/workspace/documents/proposal.json\` if useful.
 2. Produce the user-facing proposal at \`.docs/proposal/proposal.pptx\`.
-3. Assume Node.js export scripts will later convert structured content and templates into the final \`.pptx\`.
+3. Use or update the starter script at \`.agentic/workspace/scripts/generate_proposal.js\` when export automation is needed.
 4. Keep the prompt focused on presentation-ready content unless the user explicitly provides a template or style preference.
 5. If export dependencies are needed, first check whether the target project root already has a usable Node environment.
 6. Prefer the project root if it is suitable; otherwise ask the user which path should receive the install.
 7. Ask the user before running any \`npm install\`.
-8. Make gaps explicit instead of inventing details.
-9. If relevant screenshots, decks, notes, or references are found outside \`.agentic/workspace/project/\`, move or organize them into the workspace by default unless the user explicitly says not to.
-10. If key proposal inputs are still missing, ask focused questions and keep improving the proposal instead of prematurely declaring completion.
-11. Ask only the minimum blocking questions.
+8. If the project's template or style requires different export logic, update \`.agentic/workspace/scripts/generate_proposal.js\` instead of inventing a separate export path by default.
+9. Make gaps explicit instead of inventing details.
+10. If relevant screenshots, decks, notes, or references are found outside \`.agentic/workspace/project/\`, move or organize them into the workspace by default unless the user explicitly says not to.
+11. If key proposal inputs are still missing, ask focused questions and keep improving the proposal instead of prematurely declaring completion.
+12. Ask only the minimum blocking questions.
 
 When the proposal is complete enough for handoff, tell the user the workflow is complete and list the generated files.
 `,
-  ".agentic/commands/create-plan.md": `# Create Plan
+ ".agentic/commands/create-plan.md": `# Create Plan
 
 Read:
 
@@ -192,23 +196,24 @@ Read:
 
 ## Your job
 
-1. Maintain any internal draft content under \`.agentic/workspace/documents/plan.*\` if useful.
+1. Maintain any internal draft content under \`.agentic/workspace/documents/plan.md\` and structured export input under \`.agentic/workspace/documents/plan.json\` if useful.
 2. If the user has not already specified the preferred plan output, ask whether they want:
    - a document-style plan, or
    - a spreadsheet-style plan
 3. If the user already provided a template file/path/reference, follow it.
 4. Otherwise ask whether they want a specific plan style or structure.
-5. If neither a template nor a style is provided, use the built-in default structure.
+5. If neither a template nor a style is provided, use the built-in default structure and starter script shape.
 6. Produce the user-facing output at:
    - \`.docs/plan/plan.docx\` for document-style plan output, or
    - \`.docs/plan/plan.xlsx\` for spreadsheet-style plan output
-7. Assume Node.js export scripts will later convert structured content and templates into the final output format.
+7. Use or update the starter script at \`.agentic/workspace/scripts/generate_plan.js\` when export automation is needed.
 8. If export dependencies are needed, first check whether the target project root already has a usable Node environment.
 9. Prefer the project root if it is suitable; otherwise ask the user which path should receive the install.
 10. Ask the user before running any \`npm install\`.
-11. Include phases, milestones, dependencies, assumptions, risks, and sequencing.
-12. If relevant source material is outside \`.agentic/workspace/project/\`, move or organize it into the workspace by default unless the user explicitly says not to.
-13. If planning inputs are missing, ask focused questions and keep refining instead of routing.
+11. If the project's template or style requires different export logic, update \`.agentic/workspace/scripts/generate_plan.js\` instead of inventing a separate export path by default.
+12. Include phases, milestones, dependencies, assumptions, risks, and sequencing.
+13. If relevant source material is outside \`.agentic/workspace/project/\`, move or organize it into the workspace by default unless the user explicitly says not to.
+14. If planning inputs are missing, ask focused questions and keep refining instead of routing.
 
 When the plan is complete enough, tell the user the available next options:
 
@@ -217,7 +222,7 @@ When the plan is complete enough, tell the user the available next options:
 - \`@.agentic/commands/create-brd.md\`
 - \`@.agentic/commands/create-proposal.md\`
 `,
-  ".agentic/commands/create-tasks.md": `# Create Tasks
+ ".agentic/commands/create-tasks.md": `# Create Tasks
 
 Read:
 
@@ -232,18 +237,19 @@ Read:
 
 ## Your job
 
-1. Maintain any internal draft content under \`.agentic/workspace/documents/tasks.*\` if useful.
+1. Maintain any internal draft content under \`.agentic/workspace/documents/tasks.md\` and structured export input under \`.agentic/workspace/documents/tasks.json\` if useful.
 2. Produce the user-facing task breakdown at \`.docs/tasks/tasks.xlsx\`.
-3. Assume Node.js export scripts will later convert structured content and templates into the final \`.xlsx\`.
+3. Use or update the starter script at \`.agentic/workspace/scripts/generate_tasks.js\` when export automation is needed.
 4. If the user already provided a template file/path/reference, follow it.
 5. Otherwise ask whether they want a specific task breakdown style or structure.
-6. If neither a template nor a style is provided, use the built-in default structure.
+6. If neither a template nor a style is provided, use the built-in default structure and starter script shape.
 7. If export dependencies are needed, first check whether the target project root already has a usable Node environment.
 8. Prefer the project root if it is suitable; otherwise ask the user which path should receive the install.
 9. Ask the user before running any \`npm install\`.
-10. Produce a practical task breakdown with modules, roles, dependencies, sequencing, and status placeholders.
-11. If relevant source material is outside \`.agentic/workspace/project/\`, move or organize it into the workspace by default unless the user explicitly says not to.
-12. If execution detail is missing, ask focused questions and keep refining instead of routing.
+10. If the project's template or style requires different export logic, update \`.agentic/workspace/scripts/generate_tasks.js\` instead of inventing a separate export path by default.
+11. Produce a practical task breakdown with modules, roles, dependencies, sequencing, and status placeholders.
+12. If relevant source material is outside \`.agentic/workspace/project/\`, move or organize it into the workspace by default unless the user explicitly says not to.
+13. If execution detail is missing, ask focused questions and keep refining instead of routing.
 
 When the tasks are complete enough, tell the user the available next options:
 
