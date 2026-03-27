@@ -1,42 +1,59 @@
 # create-agentic-starter
 
-`create-agentic-starter` scaffolds a lightweight `.agentic/` workspace inside an existing project so AI tools can follow a repeatable kick-off workflow.
+`create-agentic-starter` scaffolds a reusable AI working area inside an existing project.
 
-The goal is to avoid rebuilding the same project-start process every time. Instead of manually re-creating prompts and folders for every new client engagement, this package sets up a standard structure for:
+It is meant for teams who repeatedly do the same early project work:
 
-- requirement gathering
-- architecture thinking
-- BRD generation
-- FRD generation
-- estimation
-- proposal drafting
+- collect requirements
+- understand screenshots, notes, and references
+- define architecture
+- prepare BRD, FRD, estimate, proposal, plan, and task outputs
 
-It is designed for prompt-driven AI tools. The generated scaffold gives each new session a clear entrypoint with `@.agentic/init.md`, a set of reusable prompts in `.agentic/commands/`, and a workspace for project assets, memory, and generated documents.
+Instead of rebuilding prompts, folders, and working conventions for every new project, this package gives the team a standard `.agentic/` setup that works across AI tools such as Codex, Claude, Cursor, Zed, and similar agentic workflows.
 
-## Usage
+## What This Project Is Trying To Achieve
+
+The package creates a lightweight but structured workflow inside the target project so an AI agent can:
+
+- understand the project from the files already present
+- gather missing context from the user
+- keep project memory in one place
+- generate internal drafts
+- create user-facing deliverables under `.docs/`
+- use starter export scripts for `.docx`, `.xlsx`, and `.pptx` outputs
+
+The goal is not to generate code for the product itself on day one. The goal is to standardize the project kick-off and delivery-document workflow so any team member can start from the same foundation.
+
+## How To Run It
+
+Run the command inside an existing project folder.
 
 ```bash
 npx create-agentic-starter
 ```
 
+or
+
 ```bash
 bunx create-agentic-starter
 ```
 
-Run the command inside an existing project folder.
+The command is non-interactive. It does not ask setup questions.
 
-The scaffold is non-interactive. It will:
+## What The Command Does
+
+When you run it, it will:
 
 - recreate `.agentic/`
 - create `.docs/` for user-facing outputs
-- preserve existing `AGENTS.md`, appending a marked `create-agentic-starter` section when needed
+- preserve an existing `AGENTS.md` and append a marked `create-agentic-starter` section when needed
 - never modify `.gitignore`
 - never modify `README.md`
-- print the next step for the team
+- print the next step for the team: start with `@.agentic/init.md`
 
-## Generated Structure
+## What Gets Created
 
-The command sets up:
+The scaffold sets up:
 
 - `.agentic/init.md`
 - `.agentic/context.md`
@@ -48,18 +65,46 @@ The command sets up:
 - `.docs/`
 - `AGENTS.md`
 
-The scaffold also includes starter export scripts under `.agentic/workspace/scripts/` for:
+This gives you a clear split:
+
+- `.agentic/workspace/project/` for raw project materials
+- `.agentic/workspace/memory/` for AI-maintained project understanding
+- `.agentic/workspace/documents/` for internal drafts and structured export input
+- `.agentic/workspace/scripts/` for starter export scripts
+- `.docs/` for final user-facing outputs
+
+## Export Scripts
+
+The scaffold includes starter export scripts under `.agentic/workspace/scripts/` for:
 
 - `.docx` via `docx`
 - `.pptx` via `pptxgenjs`
 - `.xlsx` via `exceljs`
 
-Those scripts are meant to be adapted per project when the user provides a specific template or output style.
+These scripts are intentionally starter implementations. They are expected to be adapted by the AI agent when the user provides:
 
-## First Run Flow
+- a custom template
+- a preferred document style
+- a specific export structure
 
-After scaffolding:
+## Typical Workflow
 
-1. Open your AI tool in the project.
-2. Start a new session with `@.agentic/init.md`.
-3. Follow the command sequence defined in `AGENTS.md`.
+1. Run `npx create-agentic-starter` or `bunx create-agentic-starter` in the target project.
+2. Open that project in your AI tool.
+3. Start a new session with `@.agentic/init.md`.
+4. Let the agent understand the project, ask questions, and update memory files.
+5. Continue with commands in `.agentic/commands/` such as:
+   - `@.agentic/commands/project-requirements.md`
+   - `@.agentic/commands/architecture.md`
+   - `@.agentic/commands/create-brd.md`
+   - `@.agentic/commands/create-frd.md`
+   - `@.agentic/commands/create-estimate.md`
+   - `@.agentic/commands/create-proposal.md`
+   - `@.agentic/commands/create-plan.md`
+   - `@.agentic/commands/create-tasks.md`
+
+## Notes
+
+- The scaffold is designed to be lightweight and easy to drop into an existing repo.
+- It is prompt-driven first, with export scripts available when the workflow needs generated Office documents.
+- `AGENTS.md` is used as the human-readable guide inside the target project.
