@@ -27,6 +27,8 @@ Use `.agentic/workspace/project/` for:
 
 If relevant project materials are found outside this folder, move or organize them into `.agentic/workspace/project/` by default. Only leave them in place if the user explicitly says not to move them.
 
+Figma MCP or a similar design integration is optional. If it is available, it may be used to inspect designs or gather screenshots, but ask the user before using it. If it is not available, continue with screenshots, exported frames, links, or files placed under `.agentic/workspace/project/`.
+
 ### Memory
 
 Use `.agentic/workspace/memory/` for:

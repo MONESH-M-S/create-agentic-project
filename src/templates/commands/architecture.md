@@ -19,6 +19,7 @@ Read:
 7. If architecture-critical information is still missing, ask architecture-specific questions and keep updating `.agentic/workspace/memory/architecture.md` instead of routing yet.
 8. Ask only the minimum blocking questions.
 9. If the user directly asks for a downstream deliverable and the architecture context is already sufficient, let them continue there instead of forcing this step to repeat.
+10. For UI-heavy or design-led projects, you may use Figma MCP or a similar design integration if it is available and the user approves. Otherwise rely on the design assets already placed in `.agentic/workspace/project/`.
 
 When the architecture is strong enough, tell the user the available next options, and also make it clear they can ask for something else by saying what they want to do next.
 

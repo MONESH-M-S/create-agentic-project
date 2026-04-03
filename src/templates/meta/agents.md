@@ -62,6 +62,8 @@ Starter export scripts live under `.agentic/workspace/scripts/`.
 
 Adapt the relevant script when the project needs a custom template or style. Keep the script path stable by default instead of inventing a separate export path.
 
+Figma MCP can be used as an optional accelerator for design intake when it is available. Ask the user before using it, and continue with normal screenshots or exported design assets when MCP is not available.
+
 Dependency guidance:
 
 1. Prefer the target project root if it already has a usable Node environment.

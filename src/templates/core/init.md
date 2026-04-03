@@ -47,24 +47,25 @@ You are starting a fresh AI session inside this project. Your job is to quickly 
    - scope or modules
    - available references such as screenshots, docs, notes, links, or file paths
    - desired outputs
-8. If enough context exists, give a short summary of the project and the most important missing pieces.
-9. If the user mentions screenshots, notes, requirement docs, links, or file paths, move or organize them into `.agentic/workspace/project/` by default unless the user explicitly says not to.
-10. After the first useful exchange, create or update:
+8. When design references are important and the user mentions Figma, you may suggest using Figma MCP if it is available in the environment, but ask the user before using it. If it is not available, ask for screenshots, exported frames, links, or file paths and continue normally.
+9. If enough context exists, give a short summary of the project and the most important missing pieces.
+10. If the user mentions screenshots, notes, requirement docs, links, or file paths, move or organize them into `.agentic/workspace/project/` by default unless the user explicitly says not to.
+11. After the first useful exchange, create or update:
    - `.agentic/workspace/memory/project-overview.md`
    - `.agentic/workspace/memory/requirements.md`
    - `.agentic/workspace/memory/open-questions.md`
-11. Update `.agentic/workspace/memory/architecture.md` only if the new context changes architecture.
-12. Write drafts even from partial information.
-13. Clearly separate confirmed facts, assumptions, and open questions.
-14. Do not route immediately just because the workspace is empty. Do useful synthesis or ask focused questions first.
-15. Do not rewrite unrelated files just because `@.agentic/init.md` ran.
-16. If important project basics are still missing, continue asking focused questions and keep updating the memory files instead of routing forward yet.
-17. When suggesting next commands in resumed sessions, use the existing progress:
+12. Update `.agentic/workspace/memory/architecture.md` only if the new context changes architecture.
+13. Write drafts even from partial information.
+14. Clearly separate confirmed facts, assumptions, and open questions.
+15. Do not route immediately just because the workspace is empty. Do useful synthesis or ask focused questions first.
+16. Do not rewrite unrelated files just because `@.agentic/init.md` ran.
+17. If important project basics are still missing, continue asking focused questions and keep updating the memory files instead of routing forward yet.
+18. When suggesting next commands in resumed sessions, use the existing progress:
    - if requirements exist but architecture does not, recommend `@.agentic/commands/architecture.md`
    - if architecture exists, suggest `@.agentic/commands/create-brd.md`, `@.agentic/commands/create-proposal.md`, `@.agentic/commands/create-plan.md`, and `@.agentic/commands/create-tasks.md`
    - if BRD work already exists, also allow `@.agentic/commands/create-frd.md`
    - if FRD work already exists, also allow `@.agentic/commands/create-estimate.md`
    - if estimate work already exists, also allow `@.agentic/commands/create-proposal.md`
-18. Only when you have done enough useful intake work for a first-time project, end by recommending the next command and also make it clear the user can say what they want to do now:
+19. Only when you have done enough useful intake work for a first-time project, end by recommending the next command and also make it clear the user can say what they want to do now:
 
 `Next type @.agentic/commands/project-requirements.md`

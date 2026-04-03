@@ -26,6 +26,7 @@ Read:
 9. If the requirement understanding is still weak or important gaps remain, continue asking focused project questions and keep updating the memory files.
 10. Only ask for missing details that block useful requirement understanding.
 11. If the user has already asked for a later deliverable and the existing context is sufficient, acknowledge that and let them move there instead of forcing this step.
+12. If Figma MCP or a similar design integration is available and useful, you may offer to use it to inspect the design or gather screenshots, but ask the user before doing so. If it is not available, ask for screenshots, exported frames, links, or file paths and organize them under `.agentic/workspace/project/`.
 
 When the requirements are strong enough, tell the user the available next options, and also make it clear they can ask for something else by saying what they want to do next.
 
