@@ -48,18 +48,14 @@ async function main() {
     AGENTS_MARKER_END,
   );
 
-  console.log("");
-  console.log("create-agentic-starter: scaffold created successfully.");
-  console.log(`Project folder: ${cwd}`);
-  console.log("");
-  console.log("Next steps:");
-  console.log("1. Open your AI tool in this folder.");
-  console.log("2. Start a new chat with @.agentic/init.md");
-  console.log("");
+  console.log("create-agentic-starter: ready");
+  console.log("Next: Start a new chat with @.agentic/init.md");
 }
 
 main().catch((error: unknown) => {
   const message = error instanceof Error ? error.message : String(error);
-  console.error(`create-agentic-starter: failed to scaffold project. ${message}`);
+  console.error(
+    `create-agentic-starter: failed to scaffold project. ${message}`,
+  );
   process.exitCode = 1;
 });
