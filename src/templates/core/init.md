@@ -33,39 +33,45 @@ You are starting a fresh AI session inside this project. Your job is to quickly 
    - root-level signals
    - existing workspace files
    - the user's message in this chat
-4. If `project-overview.md`, `requirements.md`, `architecture.md`, internal drafts, or user-facing outputs already exist, treat this as an in-progress workspace and resume from what is already known.
-5. In resumed sessions:
+4. Treat repo memory under `.agentic/workspace/memory/` as the shared source of truth across tools and sessions.
+5. If `project-overview.md`, `requirements.md`, `architecture.md`, `project-state.md`, internal drafts, or user-facing outputs already exist, treat this as an in-progress workspace and resume from what is already known.
+6. In resumed sessions:
    - give a short summary of what is already understood
+   - summarize current project state, active features, blockers, and next actions when that information exists
    - mention only the most important missing or uncertain pieces
    - do not ask basic project questions again unless the existing memory is clearly incomplete, contradictory, or missing a blocking detail
    - if the user adds new context, update the relevant memory files before suggesting what to do next
    - suggest valid next commands based on the current progress instead of forcing `@.agentic/commands/project-requirements.md`
-6. If the user directly asks to create or continue a specific deliverable and the existing context is sufficient, follow that request instead of routing them back through the recommended sequence.
-7. If project context is still thin, ask a small number of targeted questions about:
+7. Memory capture is always on. Do not require a separate memory-capture prompt to store useful project information.
+8. If the user directly asks to create, continue, or implement something and the existing context is sufficient, follow that request instead of routing them back through the recommended sequence.
+9. If project context is still thin, ask a small number of targeted questions about:
    - project goal
    - target users
    - scope or modules
    - available references such as screenshots, docs, notes, links, or file paths
    - desired outputs
-8. When design references are important and the user mentions Figma, you may suggest using Figma MCP if it is available in the environment, but ask the user before using it. If it is not available, ask for screenshots, exported frames, links, or file paths and continue normally.
-9. If enough context exists, give a short summary of the project and the most important missing pieces.
-10. If the user mentions screenshots, notes, requirement docs, links, or file paths, move or organize them into `.agentic/workspace/project/` by default unless the user explicitly says not to.
-11. After the first useful exchange, create or update:
+10. When design references are important and the user mentions Figma, you may suggest using Figma MCP if it is available in the environment, but ask the user before using it. If it is not available, ask for screenshots, exported frames, links, or file paths and continue normally.
+11. If enough context exists, give a short summary of the project and the most important missing pieces.
+12. If the user mentions screenshots, notes, requirement docs, links, or file paths, move or organize them into `.agentic/workspace/project/` by default unless the user explicitly says not to.
+13. After the first useful exchange, create or update:
    - `.agentic/workspace/memory/project-overview.md`
    - `.agentic/workspace/memory/requirements.md`
    - `.agentic/workspace/memory/open-questions.md`
-12. Update `.agentic/workspace/memory/architecture.md` only if the new context changes architecture.
-13. Write drafts even from partial information.
-14. Clearly separate confirmed facts, assumptions, and open questions.
-15. Do not route immediately just because the workspace is empty. Do useful synthesis or ask focused questions first.
-16. Do not rewrite unrelated files just because `@.agentic/init.md` ran.
-17. If important project basics are still missing, continue asking focused questions and keep updating the memory files instead of routing forward yet.
-18. When suggesting next commands in resumed sessions, use the existing progress:
+   - `.agentic/workspace/memory/project-state.md`
+   - `.agentic/workspace/memory/handoff.md`
+14. Update `.agentic/workspace/memory/architecture.md` only if the new context changes architecture.
+15. If the user is discussing a specific feature, create or update a feature file under `.agentic/workspace/memory/features/` using kebab-case naming and include: feature name, current status, summary, requirements, implementation notes, dependencies, blockers, decisions affecting the feature, related docs, and next steps.
+16. Write drafts even from partial information.
+17. Clearly separate confirmed facts, assumptions, and open questions.
+18. Do not route immediately just because the workspace is empty. Do useful synthesis or ask focused questions first.
+19. Do not rewrite unrelated files just because `@.agentic/init.md` ran.
+20. If important project basics are still missing, continue asking focused questions and keep updating the memory files instead of routing forward yet.
+21. When suggesting next commands in resumed sessions, use the existing progress:
    - if requirements exist but architecture does not, recommend `@.agentic/commands/architecture.md`
    - if architecture exists, suggest `@.agentic/commands/create-brd.md`, `@.agentic/commands/create-proposal.md`, `@.agentic/commands/create-plan.md`, and `@.agentic/commands/create-tasks.md`
    - if BRD work already exists, also allow `@.agentic/commands/create-frd.md`
    - if FRD work already exists, also allow `@.agentic/commands/create-estimate.md`
    - if estimate work already exists, also allow `@.agentic/commands/create-proposal.md`
-19. Only when you have done enough useful intake work for a first-time project, end by recommending the next command and also make it clear the user can say what they want to do now:
+22. Only when you have done enough useful intake work for a first-time project, end by recommending the next command and also make it clear the user can say what they want to do now:
 
 `Next type @.agentic/commands/project-requirements.md`

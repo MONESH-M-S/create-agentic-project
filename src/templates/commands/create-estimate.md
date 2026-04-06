@@ -26,6 +26,12 @@ Read:
 13. If the estimate is too uncertain because key delivery information is missing, ask focused follow-up questions and keep refining the estimate instead of routing yet.
 14. Ask only the minimum blocking questions.
 15. If the user explicitly asked for this estimate work, continue it directly using the existing workspace context instead of routing them backward.
+16. Memory capture is always on for this step. Update:
+   - `.agentic/workspace/memory/project-state.md`
+   - `.agentic/workspace/memory/handoff.md`
+   - `.agentic/workspace/memory/next-actions.md` if follow-up work remains
+   - `.agentic/workspace/memory/decisions.md` if this step creates a meaningful product or technical decision
+17. If this estimate work materially affects one or more features, update the matching feature files under `.agentic/workspace/memory/features/`.
 
 When the estimate is strong enough for proposal drafting, recommend the next command and also make it clear the user can say what they want to do now:
 

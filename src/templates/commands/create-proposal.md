@@ -25,5 +25,11 @@ Read:
 11. If key proposal inputs are still missing, ask focused questions and keep improving the proposal instead of prematurely declaring completion.
 12. Ask only the minimum blocking questions.
 13. If the user explicitly asked for this proposal work, continue it directly using the existing workspace context instead of routing them backward.
+14. Memory capture is always on for this step. Update:
+   - `.agentic/workspace/memory/project-state.md`
+   - `.agentic/workspace/memory/handoff.md`
+   - `.agentic/workspace/memory/next-actions.md` if follow-up work remains
+   - `.agentic/workspace/memory/decisions.md` if this step creates a meaningful product or technical decision
+15. If this proposal work materially affects one or more features, update the matching feature files under `.agentic/workspace/memory/features/`.
 
 When the proposal is complete enough for handoff, tell the user the workflow is complete and list the generated files.

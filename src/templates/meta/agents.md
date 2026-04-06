@@ -45,6 +45,8 @@ Use this scaffold when you want an AI tool to:
 
 If a workspace already contains memory and document progress, `@.agentic/init.md` should summarize what is already known, update memory with any new context from the user, and let the user continue from the relevant next step instead of restarting the full sequence.
 
+Memory capture is automatic during normal work. Users do not need to run a separate prompt just to store project context.
+
 ## Output Conventions
 
 Default user-facing outputs live under `.docs/`:
@@ -75,5 +77,11 @@ Planned library stack:
 - `docx`
 - `pptxgenjs`
 - `exceljs`
+
+## Shared Memory
+
+`.agentic/workspace/memory/` is the shared project memory layer across tools such as Codex, Claude, Cursor, Antigravity, and others.
+
+Use repo memory as the source of truth instead of tool-local memory paths or raw chat history.
 
 If your tool does not support `@file` references, paste the contents of the prompt file into a new chat manually.

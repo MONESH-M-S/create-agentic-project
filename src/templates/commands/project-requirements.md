@@ -27,6 +27,13 @@ Read:
 10. Only ask for missing details that block useful requirement understanding.
 11. If the user has already asked for a later deliverable and the existing context is sufficient, acknowledge that and let them move there instead of forcing this step.
 12. If Figma MCP or a similar design integration is available and useful, you may offer to use it to inspect the design or gather screenshots, but ask the user before doing so. If it is not available, ask for screenshots, exported frames, links, or file paths and organize them under `.agentic/workspace/project/`.
+13. Memory capture is always on for this step. Update:
+   - `.agentic/workspace/memory/project-overview.md`
+   - `.agentic/workspace/memory/requirements.md`
+   - `.agentic/workspace/memory/open-questions.md`
+   - `.agentic/workspace/memory/project-state.md`
+   - `.agentic/workspace/memory/handoff.md`
+14. If this step introduces or refines a specific feature, create or update the matching file under `.agentic/workspace/memory/features/`.
 
 When the requirements are strong enough, tell the user the available next options, and also make it clear they can ask for something else by saying what they want to do next.
 

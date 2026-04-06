@@ -29,6 +29,12 @@ Read:
 13. If relevant source material is outside `.agentic/workspace/project/`, move or organize it into the workspace by default unless the user explicitly says not to.
 14. If planning inputs are missing, ask focused questions and keep refining instead of routing.
 15. If the user explicitly asked for this plan work, continue it directly using the existing workspace context instead of routing them backward.
+16. Memory capture is always on for this step. Update:
+   - `.agentic/workspace/memory/project-state.md`
+   - `.agentic/workspace/memory/handoff.md`
+   - `.agentic/workspace/memory/next-actions.md` if follow-up work remains
+   - `.agentic/workspace/memory/decisions.md` if this step creates a meaningful product or technical decision
+17. If this plan work materially affects one or more features, update the matching feature files under `.agentic/workspace/memory/features/`.
 
 When the plan is complete enough, tell the user the available next options, and also make it clear they can ask for something else by saying what they want to do next.
 

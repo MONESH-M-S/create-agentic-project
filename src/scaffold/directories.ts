@@ -6,6 +6,7 @@ export const DIRECTORIES = [
   ".agentic/workspace",
   ".agentic/workspace/project",
   ".agentic/workspace/memory",
+  ".agentic/workspace/memory/features",
   ".agentic/workspace/documents",
   ".agentic/workspace/scripts",
   ".docs",

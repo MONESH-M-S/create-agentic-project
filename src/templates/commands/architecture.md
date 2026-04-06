@@ -20,6 +20,12 @@ Read:
 8. Ask only the minimum blocking questions.
 9. If the user directly asks for a downstream deliverable and the architecture context is already sufficient, let them continue there instead of forcing this step to repeat.
 10. For UI-heavy or design-led projects, you may use Figma MCP or a similar design integration if it is available and the user approves. Otherwise rely on the design assets already placed in `.agentic/workspace/project/`.
+11. Memory capture is always on for this step. Update:
+   - `.agentic/workspace/memory/architecture.md`
+   - `.agentic/workspace/memory/decisions.md` for major technical choices
+   - `.agentic/workspace/memory/project-state.md`
+   - `.agentic/workspace/memory/handoff.md`
+12. If architecture work affects a specific feature, update the matching file under `.agentic/workspace/memory/features/`.
 
 When the architecture is strong enough, tell the user the available next options, and also make it clear they can ask for something else by saying what they want to do next.
 

@@ -24,6 +24,12 @@ Read:
 12. If relevant source material is outside `.agentic/workspace/project/`, move or organize it into the workspace by default unless the user explicitly says not to.
 13. If critical information is missing, ask only the minimum blocking questions and keep improving the BRD draft instead of routing yet.
 14. If the user explicitly asked for this BRD work, continue it directly using the existing workspace context instead of routing them backward.
+15. Memory capture is always on for this step. Update:
+   - `.agentic/workspace/memory/project-state.md`
+   - `.agentic/workspace/memory/handoff.md`
+   - `.agentic/workspace/memory/next-actions.md` if follow-up work remains
+   - `.agentic/workspace/memory/decisions.md` if this step creates a meaningful product or technical decision
+16. If this BRD work materially affects one or more features, update the matching feature files under `.agentic/workspace/memory/features/`.
 
 When the BRD is solid enough to define functional requirements, recommend the next command and also make it clear the user can say what they want to do now:
 

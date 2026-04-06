@@ -24,6 +24,12 @@ Read:
 11. If important functional details are still missing, ask focused follow-up questions and keep improving the FRD instead of routing yet.
 12. Ask only the minimum blocking questions.
 13. If the user explicitly asked for this FRD work, continue it directly using the existing workspace context instead of routing them backward.
+14. Memory capture is always on for this step. Update:
+   - `.agentic/workspace/memory/project-state.md`
+   - `.agentic/workspace/memory/handoff.md`
+   - `.agentic/workspace/memory/next-actions.md` if follow-up work remains
+   - `.agentic/workspace/memory/decisions.md` if this step creates a meaningful product or technical decision
+15. If this FRD work materially affects one or more features, update the matching feature files under `.agentic/workspace/memory/features/`.
 
 When the FRD is strong enough for estimation, recommend the next command and also make it clear the user can say what they want to do now:
 

@@ -37,6 +37,11 @@ Use `.agentic/workspace/memory/` for:
 - `requirements.md`
 - `open-questions.md`
 - `architecture.md`
+- `project-state.md`
+- `decisions.md`
+- `next-actions.md`
+- `handoff.md`
+- `features/` for one file per feature or workstream
 - assumptions and structured working memory
 
 ### Internal Documents
@@ -88,11 +93,15 @@ Use `.docs/` for user-facing deliverables:
 3. If relevant project assets are outside `.agentic/workspace/project/`, move them into the workspace by default and then use the workspace copy.
 4. Only avoid moving files when the user explicitly asks to keep them in place.
 5. Keep internal working material in `.agentic/workspace/` and user-facing deliverables in `.docs/`.
-6. In a fresh chat, treat existing memory files and existing outputs as the primary source of truth for resume behavior.
-7. Do not restart basic intake if the workspace already contains strong memory unless the existing information is clearly incomplete or contradictory.
-8. If the user directly asks for a specific deliverable or command, follow that request when enough context already exists.
-9. Prefer the target project root for Node-based export dependencies when a usable Node setup already exists there.
-10. If root is not suitable, ask the user which path should be used for dependency installation.
-11. Ask the user before running any install command.
-12. Ask only the minimum blocking questions required to continue.
-13. Always end by telling the user the exact next command to run or listing the available next options.
+6. Treat `.agentic/workspace/memory/` as the canonical shared project memory across tools and sessions.
+7. Do not rely on tool-local memory paths such as `~/.codex/...` as the primary source of truth.
+8. Store outcomes, decisions, feature state, blockers, handoff notes, and next actions instead of raw chat transcripts.
+9. In a fresh chat, treat existing memory files and existing outputs as the primary source of truth for resume behavior.
+10. Do not restart basic intake if the workspace already contains strong memory unless the existing information is clearly incomplete or contradictory.
+11. If the user directly asks for a specific deliverable, feature discussion, or implementation task and enough context already exists, do the work and capture the outcome automatically in the relevant memory files.
+12. Update only the memory files affected by the current work instead of rewriting everything.
+13. Prefer the target project root for Node-based export dependencies when a usable Node setup already exists there.
+14. If root is not suitable, ask the user which path should be used for dependency installation.
+15. Ask the user before running any install command.
+16. Ask only the minimum blocking questions required to continue.
+17. Always end by telling the user the exact next command to run or listing the available next options.
