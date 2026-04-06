@@ -1,0 +1,52 @@
+# Implementation
+
+Read:
+
+- `@.agentic/context.md`
+- `.agentic/workspace/memory/project-state.md`
+- `.agentic/workspace/memory/handoff.md`
+- `.agentic/workspace/memory/decisions.md` if it exists
+- `.agentic/workspace/memory/project-overview.md` if it exists
+- `.agentic/workspace/memory/requirements.md` if it exists
+- `.agentic/workspace/memory/architecture.md` if it exists
+- relevant feature files under `.agentic/workspace/memory/features/` if they exist
+- relevant files under `.agentic/workspace/project/`
+
+## Your job
+
+1. Handle direct coding, feature, page, flow, or implementation requests.
+2. Identify the affected feature or create a new feature record if needed.
+3. Do the requested implementation work using the existing project context.
+4. If the user asks for a page, route, feature, component, or flow change, treat that as implementation work even if they did not tag a command.
+5. Ask only the minimum blocking questions needed to implement safely.
+6. Memory capture is always on for this step. Update:
+   - `.agentic/workspace/memory/project-state.md`
+   - `.agentic/workspace/memory/handoff.md`
+   - `.agentic/workspace/memory/features/<feature>.md`
+7. Update `.agentic/workspace/memory/decisions.md` only if the work creates a meaningful product or technical decision.
+8. Update `.agentic/workspace/memory/requirements.md` only if the request changes product scope or behavior expectations.
+9. Update `.agentic/workspace/memory/architecture.md` only if the work changes architecture or important technical direction.
+10. Keep `project-state.md` and `handoff.md` short.
+11. Use one file per feature under `.agentic/workspace/memory/features/` with kebab-case naming such as:
+   - `landing-page.md`
+   - `about-page.md`
+   - `checkout.md`
+12. Use this feature file structure:
+   - Feature Name
+   - Current Status
+   - Summary
+   - Requirements
+   - Implementation Notes
+   - Dependencies
+   - Blockers
+   - Decisions Affecting This Feature
+   - Related Outputs or Docs
+   - Next Steps
+
+When the implementation work is complete enough, tell the user the available next options and make it clear they can also say what they want to do next.
+
+- continue implementation work
+- `@.agentic/commands/create-plan.md`
+- `@.agentic/commands/create-tasks.md`
+- `@.agentic/commands/create-brd.md`
+- `@.agentic/commands/create-proposal.md`

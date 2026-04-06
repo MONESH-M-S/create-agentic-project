@@ -7,6 +7,7 @@ This repository uses a prompt-based project kick-off system.
 - `.agentic/init.md`: session bootstrap prompt
 - `.agentic/context.md`: shared rules and folder semantics
 - `.agentic/commands/`: prompt files for distinct tasks
+- `.agentic/commands/implementation.md`: implementation and feature-work prompt
 - `.agentic/workspace/project/`: raw project materials
 - `.agentic/workspace/memory/`: evolving AI-maintained understanding
 - `.agentic/workspace/documents/`: internal drafts and intermediate artifacts
@@ -100,8 +101,14 @@ Use `.docs/` for user-facing deliverables:
 10. Do not restart basic intake if the workspace already contains strong memory unless the existing information is clearly incomplete or contradictory.
 11. If the user directly asks for a specific deliverable, feature discussion, or implementation task and enough context already exists, do the work and capture the outcome automatically in the relevant memory files.
 12. Update only the memory files affected by the current work instead of rewriting everything.
-13. Prefer the target project root for Node-based export dependencies when a usable Node setup already exists there.
-14. If root is not suitable, ask the user which path should be used for dependency installation.
-15. Ask the user before running any install command.
-16. Ask only the minimum blocking questions required to continue.
-17. Always end by telling the user the exact next command to run or listing the available next options.
+13. For normal coding work, update:
+   - the relevant feature file under `.agentic/workspace/memory/features/`
+   - `.agentic/workspace/memory/project-state.md`
+   - `.agentic/workspace/memory/handoff.md`
+14. Update `.agentic/workspace/memory/decisions.md` only when the work creates a meaningful product or technical decision.
+15. Update `.agentic/workspace/memory/requirements.md` or `.agentic/workspace/memory/architecture.md` only when the current work actually changes them.
+16. Prefer the target project root for Node-based export dependencies when a usable Node setup already exists there.
+17. If root is not suitable, ask the user which path should be used for dependency installation.
+18. Ask the user before running any install command.
+19. Ask only the minimum blocking questions required to continue.
+20. Always end by telling the user the exact next command to run or listing the available next options.

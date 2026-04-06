@@ -36,6 +36,7 @@ Use this scaffold when you want an AI tool to:
 2. `@.agentic/commands/project-requirements.md`
 3. `@.agentic/commands/architecture.md`
 4. Then choose from the available options shown by the current command, such as:
+   - `@.agentic/commands/implementation.md`
    - `@.agentic/commands/create-brd.md`
    - `@.agentic/commands/create-frd.md`
    - `@.agentic/commands/create-estimate.md`
@@ -46,6 +47,8 @@ Use this scaffold when you want an AI tool to:
 If a workspace already contains memory and document progress, `@.agentic/init.md` should summarize what is already known, update memory with any new context from the user, and let the user continue from the relevant next step instead of restarting the full sequence.
 
 Memory capture is automatic during normal work. Users do not need to run a separate prompt just to store project context.
+
+For direct coding or feature requests, use `@.agentic/commands/implementation.md` or let `@.agentic/init.md` continue with implementation behavior automatically.
 
 ## Output Conventions
 

@@ -44,6 +44,9 @@ You are starting a fresh AI session inside this project. Your job is to quickly 
    - suggest valid next commands based on the current progress instead of forcing `@.agentic/commands/project-requirements.md`
 7. Memory capture is always on. Do not require a separate memory-capture prompt to store useful project information.
 8. If the user directly asks to create, continue, or implement something and the existing context is sufficient, follow that request instead of routing them back through the recommended sequence.
+   - treat page work, feature work, component work, route work, and flow changes as implementation work
+   - use the behavior of `@.agentic/commands/implementation.md` even if the user did not explicitly tag it
+   - update the relevant feature file, `project-state.md`, and `handoff.md` before finishing
 9. If project context is still thin, ask a small number of targeted questions about:
    - project goal
    - target users
@@ -68,6 +71,7 @@ You are starting a fresh AI session inside this project. Your job is to quickly 
 20. If important project basics are still missing, continue asking focused questions and keep updating the memory files instead of routing forward yet.
 21. When suggesting next commands in resumed sessions, use the existing progress:
    - if requirements exist but architecture does not, recommend `@.agentic/commands/architecture.md`
+   - if the user is asking for coding or feature work, allow `@.agentic/commands/implementation.md`
    - if architecture exists, suggest `@.agentic/commands/create-brd.md`, `@.agentic/commands/create-proposal.md`, `@.agentic/commands/create-plan.md`, and `@.agentic/commands/create-tasks.md`
    - if BRD work already exists, also allow `@.agentic/commands/create-frd.md`
    - if FRD work already exists, also allow `@.agentic/commands/create-estimate.md`

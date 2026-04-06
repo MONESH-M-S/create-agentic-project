@@ -26,4 +26,7 @@ export const commandFiles: FileMap = {
   ".agentic/commands/create-tasks.md": readTemplate(
     "./templates/commands/create-tasks.md",
   ),
+  ".agentic/commands/implementation.md": readTemplate(
+    "./templates/commands/implementation.md",
+  ),
 };
