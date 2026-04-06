@@ -10,7 +10,7 @@
 
 ## In Progress
 
-- Add active workstreams or features here
+- Add active workstreams or features here with status
 
 ## Completed Outputs
 
@@ -18,7 +18,7 @@
 
 ## Active Features
 
-- Add links or references to feature files under `features/`
+- Add links or references to feature files under `features/` with current status
 
 ## Blockers
 

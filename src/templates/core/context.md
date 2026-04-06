@@ -105,10 +105,11 @@ Use `.docs/` for user-facing deliverables:
    - the relevant feature file under `.agentic/workspace/memory/features/`
    - `.agentic/workspace/memory/project-state.md`
    - `.agentic/workspace/memory/handoff.md`
-14. Update `.agentic/workspace/memory/decisions.md` only when the work creates a meaningful product or technical decision.
-15. Update `.agentic/workspace/memory/requirements.md` or `.agentic/workspace/memory/architecture.md` only when the current work actually changes them.
-16. Prefer the target project root for Node-based export dependencies when a usable Node setup already exists there.
-17. If root is not suitable, ask the user which path should be used for dependency installation.
-18. Ask the user before running any install command.
-19. Ask only the minimum blocking questions required to continue.
-20. Always end by telling the user the exact next command to run or listing the available next options.
+14. When implementation work changes feature progress, always update the feature status and reflect that same status in `project-state.md` and `handoff.md`.
+15. Update `.agentic/workspace/memory/decisions.md` only when the work creates a meaningful product or technical decision.
+16. Update `.agentic/workspace/memory/requirements.md` or `.agentic/workspace/memory/architecture.md` only when the current work actually changes them.
+17. Prefer the target project root for Node-based export dependencies when a usable Node setup already exists there.
+18. If root is not suitable, ask the user which path should be used for dependency installation.
+19. Ask the user before running any install command.
+20. Ask only the minimum blocking questions required to continue.
+21. Always end by telling the user the exact next command to run or listing the available next options.

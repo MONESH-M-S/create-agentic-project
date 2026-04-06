@@ -23,15 +23,21 @@ Read:
    - `.agentic/workspace/memory/project-state.md`
    - `.agentic/workspace/memory/handoff.md`
    - `.agentic/workspace/memory/features/<feature>.md`
-7. Update `.agentic/workspace/memory/decisions.md` only if the work creates a meaningful product or technical decision.
-8. Update `.agentic/workspace/memory/requirements.md` only if the request changes product scope or behavior expectations.
-9. Update `.agentic/workspace/memory/architecture.md` only if the work changes architecture or important technical direction.
-10. Keep `project-state.md` and `handoff.md` short.
-11. Use one file per feature under `.agentic/workspace/memory/features/` with kebab-case naming such as:
+7. Always update the feature status after the work. Use clear states such as:
+   - `planned`
+   - `in-progress`
+   - `completed`
+   - `blocked`
+8. If implementation work is finished in this session, mark the feature as `completed` or `partially completed` clearly in the feature file and reflect that in `project-state.md`.
+9. Update `.agentic/workspace/memory/decisions.md` only if the work creates a meaningful product or technical decision.
+10. Update `.agentic/workspace/memory/requirements.md` only if the request changes product scope or behavior expectations.
+11. Update `.agentic/workspace/memory/architecture.md` only if the work changes architecture or important technical direction.
+12. Keep `project-state.md` and `handoff.md` short.
+13. Use one file per feature under `.agentic/workspace/memory/features/` with kebab-case naming such as:
    - `landing-page.md`
    - `about-page.md`
    - `checkout.md`
-12. Use this feature file structure:
+14. Use this feature file structure:
    - Feature Name
    - Current Status
    - Summary
@@ -42,6 +48,8 @@ Read:
    - Decisions Affecting This Feature
    - Related Outputs or Docs
    - Next Steps
+15. `project-state.md` must also be updated so the feature appears under the correct section such as current priorities, in progress, blockers, or completed work.
+16. `handoff.md` must mention whether the implementation was completed, partially completed, or left blocked, and what should happen next.
 
 When the implementation work is complete enough, tell the user the available next options and make it clear they can also say what they want to do next.
 
