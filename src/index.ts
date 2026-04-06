@@ -10,6 +10,31 @@ import {
 } from "./lib/managed-files.js";
 import { DIRECTORIES, RESET_PATHS, fileContents } from "./scaffold/index.js";
 
+const ANSI = {
+  reset: "\u001B[0m",
+  bold: "\u001B[1m",
+  red: "\u001B[31m",
+  green: "\u001B[32m",
+  cyan: "\u001B[36m",
+};
+
+function colorize(text: string, color: string) {
+  if (!process.stdout.isTTY) {
+    return text;
+  }
+
+  return `${color}${text}${ANSI.reset}`;
+}
+
+function formatBlock(title: string, lines: string[]) {
+  const content = [title, ...lines];
+  const width = Math.max(...content.map((line) => line.length));
+  const border = `+${"-".repeat(width + 2)}+`;
+  const body = content.map((line) => `| ${line.padEnd(width)} |`);
+
+  return [border, ...body, border].join("\n");
+}
+
 async function resetGeneratedPaths(cwd: string) {
   await Promise.all(
     RESET_PATHS.map((target) =>
@@ -48,14 +73,23 @@ async function main() {
     AGENTS_MARKER_END,
   );
 
-  console.log("create-agentic-starter: ready");
-  console.log("Next: Start a new chat with @.agentic/init.md");
+  const output = formatBlock(
+    colorize("create-agentic-starter ready", `${ANSI.bold}${ANSI.green}`),
+    [
+      `Folder: ${cwd}`,
+      `Next: ${colorize("@.agentic/init.md", `${ANSI.bold}${ANSI.cyan}`)}`,
+    ],
+  );
+
+  console.log(output);
 }
 
 main().catch((error: unknown) => {
   const message = error instanceof Error ? error.message : String(error);
-  console.error(
-    `create-agentic-starter: failed to scaffold project. ${message}`,
+  const output = formatBlock(
+    colorize("create-agentic-starter failed", `${ANSI.bold}${ANSI.red}`),
+    [message],
   );
+  console.error(output);
   process.exitCode = 1;
 });
