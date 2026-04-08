@@ -1,3 +1,4 @@
+<!-- from create-agentic-starter:agents:start -->
 # Agentic Starter Guide
 
 This project includes a reusable AI working area under `.agentic/` for project kick-off and delivery documentation.
@@ -90,3 +91,5 @@ Use repo memory as the source of truth instead of tool-local memory paths or raw
 Use `features/index.md` for quick feature lookup and one canonical file per module or feature for detailed status, aliases, routes, flow, key code references, and implementation context. When useful, store feature flow diagrams in Mermaid.
 
 If your tool does not support `@file` references, paste the contents of the prompt file into a new chat manually.
+<!-- from create-agentic-starter:agents:end -->
+
