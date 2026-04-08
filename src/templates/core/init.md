@@ -55,33 +55,42 @@ You are starting a fresh AI session inside this project. Your job is to quickly 
    - available references such as screenshots, docs, notes, links, or file paths
    - desired outputs
 10. When design references are important and the user mentions Figma, you may suggest using Figma MCP if it is available in the environment, but ask the user before using it. If it is not available, ask for screenshots, exported frames, links, or file paths and continue normally.
-11. If enough context exists, give a short summary of the project and the most important missing pieces.
-12. If the user mentions screenshots, notes, requirement docs, links, or file paths, move or organize them into `.agentic/workspace/project/` by default unless the user explicitly says not to.
-13. After the first useful exchange, create or update:
+11. Judge the current context level before suggesting what comes next:
+   - `partial context`: there is only a high-level understanding and important requirement detail is still missing
+   - `sufficient requirements`: the project is understandable enough to move into architecture, but requirement refinement could still improve the result
+   - `strong requirements`: the requirement understanding is detailed enough that architecture is the clear recommended next step
+12. If enough context exists, give a short summary of the project and the most important missing pieces.
+13. If the user mentions screenshots, notes, requirement docs, links, or file paths, move or organize them into `.agentic/workspace/project/` by default unless the user explicitly says not to.
+14. After the first useful exchange, create or update:
    - `.agentic/workspace/memory/project-overview.md`
    - `.agentic/workspace/memory/requirements.md`
    - `.agentic/workspace/memory/open-questions.md`
    - `.agentic/workspace/memory/project-state.md`
    - `.agentic/workspace/memory/handoff.md`
-14. Update `.agentic/workspace/memory/architecture.md` only if the new context changes architecture.
-15. If the user is discussing a specific feature, create or update a feature file under `.agentic/workspace/memory/features/` using kebab-case naming and include: feature name, current status, summary, requirements, implementation notes, dependencies, blockers, decisions affecting the feature, related docs, and next steps.
-16. Use module-first feature identity. Routes, screens, and alternate names should be treated as aliases or metadata attached to a canonical feature file.
-17. If `.agentic/workspace/memory/features/index.md` exists, use it as the quick lookup layer for feature status before reading deeper feature files.
-18. When the user asks about a specific feature, resolve likely matches by feature name, aliases, routes, or screens.
-19. If one clear match exists, read the feature file and explain its status and flow from there. Show a Mermaid diagram if the environment supports Mermaid, otherwise explain the same flow in short ordered text.
-20. If multiple likely matches exist, ask a short clarification question instead of guessing.
-21. Write drafts even from partial information.
-22. Clearly separate confirmed facts, assumptions, and open questions.
-23. Do not route immediately just because the workspace is empty. Do useful synthesis or ask focused questions first.
-24. Do not rewrite unrelated files just because `@.agentic/init.md` ran.
-25. If important project basics are still missing, continue asking focused questions and keep updating the memory files instead of routing forward yet.
-26. When suggesting next commands in resumed sessions, use the existing progress:
+15. Update `.agentic/workspace/memory/architecture.md` only if the new context changes architecture.
+16. If the user is discussing a specific feature, create or update a feature file under `.agentic/workspace/memory/features/` using kebab-case naming and include: feature name, current status, summary, requirements, implementation notes, dependencies, blockers, decisions affecting the feature, related docs, and next steps.
+17. Use module-first feature identity. Routes, screens, and alternate names should be treated as aliases or metadata attached to a canonical feature file.
+18. If `.agentic/workspace/memory/features/index.md` exists, use it as the quick lookup layer for feature status before reading deeper feature files.
+19. When the user asks about a specific feature, resolve likely matches by feature name, aliases, routes, or screens.
+20. If one clear match exists, read the feature file and explain its status and flow from there. Show a Mermaid diagram if the environment supports Mermaid, otherwise explain the same flow in short ordered text.
+21. If multiple likely matches exist, ask a short clarification question instead of guessing.
+22. Write drafts even from partial information.
+23. Clearly separate confirmed facts, assumptions, and open questions.
+24. Do not route immediately just because the workspace is empty. Do useful synthesis or ask focused questions first.
+25. Do not rewrite unrelated files just because `@.agentic/init.md` ran.
+26. If important project basics are still missing, continue asking focused questions and keep updating the memory files instead of routing forward yet.
+27. When suggesting next commands in resumed sessions, use the existing progress:
    - if requirements exist but architecture does not, recommend `@.agentic/commands/architecture.md`
    - if the user is asking for coding or feature work, allow `@.agentic/commands/implementation.md`
    - if architecture exists, suggest `@.agentic/commands/create-brd.md`, `@.agentic/commands/create-proposal.md`, `@.agentic/commands/create-plan.md`, and `@.agentic/commands/create-tasks.md`
    - if BRD work already exists, also allow `@.agentic/commands/create-frd.md`
    - if FRD work already exists, also allow `@.agentic/commands/create-estimate.md`
    - if estimate work already exists, also allow `@.agentic/commands/create-proposal.md`
-27. Only when you have done enough useful intake work for a first-time project, end by recommending the next command and also make it clear the user can say what they want to do now:
-
-`Next type @.agentic/commands/project-requirements.md`
+28. For first-time projects, choose the handoff style based on the context level:
+   - if the context is still partial, say you have a high-level understanding and offer:
+     - `@.agentic/commands/project-requirements.md` to refine requirements further
+     - `@.agentic/commands/architecture.md` only if the user wants to move forward with the current understanding
+   - if the requirements are sufficient but not strong, present both `@.agentic/commands/project-requirements.md` and `@.agentic/commands/architecture.md`, with a light recommendation based on the remaining gaps
+   - if the requirements are strong, recommend `@.agentic/commands/architecture.md`
+29. Never make architecture sound mandatory when the current understanding is still high level.
+30. When offering next steps, always make it clear the user can also say what they want to do now instead of following a listed command.
