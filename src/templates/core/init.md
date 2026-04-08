@@ -24,6 +24,7 @@ You are starting a fresh AI session inside this project. Your job is to quickly 
    - a short synthesized summary of what you understand, or
    - a few focused questions if important context is still missing
 5. When meaningful memory already exists, default to resume behavior rather than first-time intake behavior.
+6. For a truly fresh project, keep the first `@.agentic/init.md` response intake-only. Do not recommend downstream commands in that first response.
 
 ## What To Do
 
@@ -94,3 +95,7 @@ You are starting a fresh AI session inside this project. Your job is to quickly 
    - if the requirements are strong, recommend `@.agentic/commands/architecture.md`
 29. Never make architecture sound mandatory when the current understanding is still high level.
 30. When offering next steps, always make it clear the user can also say what they want to do now instead of following a listed command.
+31. Fresh-project gating rule:
+   - on the very first `@.agentic/init.md` response for a fresh workspace, ask focused intake questions and do not route yet
+   - after the user answers at least one intake round and you have enough context to synthesize, then you may offer next options such as `@.agentic/commands/project-requirements.md` and `@.agentic/commands/architecture.md`
+   - if context is still high-level after that, present requirement refinement first and architecture as optional
