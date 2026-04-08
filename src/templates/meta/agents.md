@@ -87,4 +87,6 @@ Planned library stack:
 
 Use repo memory as the source of truth instead of tool-local memory paths or raw chat history.
 
+Use `features/index.md` for quick feature lookup and one file per feature for detailed status, flow, and implementation context. When useful, store feature flow diagrams in Mermaid.
+
 If your tool does not support `@file` references, paste the contents of the prompt file into a new chat manually.

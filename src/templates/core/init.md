@@ -38,6 +38,7 @@ You are starting a fresh AI session inside this project. Your job is to quickly 
 6. In resumed sessions:
    - give a short summary of what is already understood
    - summarize current project state, active features, blockers, and next actions when that information exists
+   - prioritize `.agentic/workspace/memory/features/index.md` as the quick feature summary when it exists
    - mention only the most important missing or uncertain pieces
    - do not ask basic project questions again unless the existing memory is clearly incomplete, contradictory, or missing a blocking detail
    - if the user adds new context, update the relevant memory files before suggesting what to do next
@@ -64,18 +65,20 @@ You are starting a fresh AI session inside this project. Your job is to quickly 
    - `.agentic/workspace/memory/handoff.md`
 14. Update `.agentic/workspace/memory/architecture.md` only if the new context changes architecture.
 15. If the user is discussing a specific feature, create or update a feature file under `.agentic/workspace/memory/features/` using kebab-case naming and include: feature name, current status, summary, requirements, implementation notes, dependencies, blockers, decisions affecting the feature, related docs, and next steps.
-16. Write drafts even from partial information.
-17. Clearly separate confirmed facts, assumptions, and open questions.
-18. Do not route immediately just because the workspace is empty. Do useful synthesis or ask focused questions first.
-19. Do not rewrite unrelated files just because `@.agentic/init.md` ran.
-20. If important project basics are still missing, continue asking focused questions and keep updating the memory files instead of routing forward yet.
-21. When suggesting next commands in resumed sessions, use the existing progress:
+16. If `.agentic/workspace/memory/features/index.md` exists, use it as the quick lookup layer for feature status before reading deeper feature files.
+17. When the user asks about a specific feature, explain its current status and flow from the feature file. Show a Mermaid diagram if the environment supports Mermaid, otherwise explain the same flow in short ordered text.
+18. Write drafts even from partial information.
+19. Clearly separate confirmed facts, assumptions, and open questions.
+20. Do not route immediately just because the workspace is empty. Do useful synthesis or ask focused questions first.
+21. Do not rewrite unrelated files just because `@.agentic/init.md` ran.
+22. If important project basics are still missing, continue asking focused questions and keep updating the memory files instead of routing forward yet.
+23. When suggesting next commands in resumed sessions, use the existing progress:
    - if requirements exist but architecture does not, recommend `@.agentic/commands/architecture.md`
    - if the user is asking for coding or feature work, allow `@.agentic/commands/implementation.md`
    - if architecture exists, suggest `@.agentic/commands/create-brd.md`, `@.agentic/commands/create-proposal.md`, `@.agentic/commands/create-plan.md`, and `@.agentic/commands/create-tasks.md`
    - if BRD work already exists, also allow `@.agentic/commands/create-frd.md`
    - if FRD work already exists, also allow `@.agentic/commands/create-estimate.md`
    - if estimate work already exists, also allow `@.agentic/commands/create-proposal.md`
-22. Only when you have done enough useful intake work for a first-time project, end by recommending the next command and also make it clear the user can say what they want to do now:
+24. Only when you have done enough useful intake work for a first-time project, end by recommending the next command and also make it clear the user can say what they want to do now:
 
 `Next type @.agentic/commands/project-requirements.md`

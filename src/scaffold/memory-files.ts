@@ -14,4 +14,7 @@ export const memoryFiles: FileMap = {
   ".agentic/workspace/memory/handoff.md": readTemplate(
     "./templates/memory/handoff.md",
   ),
+  ".agentic/workspace/memory/features/index.md": readTemplate(
+    "./templates/memory/features-index.md",
+  ),
 };

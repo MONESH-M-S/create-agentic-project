@@ -22,6 +22,7 @@ Read:
 6. Memory capture is always on for this step. Update:
    - `.agentic/workspace/memory/project-state.md`
    - `.agentic/workspace/memory/handoff.md`
+   - `.agentic/workspace/memory/features/index.md`
    - `.agentic/workspace/memory/features/<feature>.md`
 7. Always update the feature status after the work. Use clear states such as:
    - `planned`
@@ -41,6 +42,8 @@ Read:
    - Feature Name
    - Current Status
    - Summary
+   - User Flow
+   - Mermaid Flow Diagram
    - Requirements
    - Implementation Notes
    - Dependencies
@@ -48,8 +51,16 @@ Read:
    - Decisions Affecting This Feature
    - Related Outputs or Docs
    - Next Steps
-15. `project-state.md` must also be updated so the feature appears under the correct section such as current priorities, in progress, blockers, or completed work.
-16. `handoff.md` must mention whether the implementation was completed, partially completed, or left blocked, and what should happen next.
+15. Keep `.agentic/workspace/memory/features/index.md` short and update it with:
+   - feature name
+   - current status
+   - short summary
+   - priority if useful
+   - related feature file
+16. When explaining or updating a meaningful feature flow, include a Mermaid flowchart if the tool supports Mermaid. If Mermaid is not supported, store the same flow as a short ordered text flow under `User Flow`.
+17. Keep flow diagrams lightweight and readable. Use them for page flow, user journey, state transitions, approval flow, or feature branches, not for full system architecture.
+18. `project-state.md` must also be updated so the feature appears under the correct section such as current priorities, in progress, blockers, or completed work.
+19. `handoff.md` must mention whether the implementation was completed, partially completed, or left blocked, and what should happen next.
 
 When the implementation work is complete enough, tell the user the available next options and make it clear they can also say what they want to do next.
 

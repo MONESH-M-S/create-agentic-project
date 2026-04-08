@@ -42,6 +42,7 @@ Use `.agentic/workspace/memory/` for:
 - `decisions.md`
 - `next-actions.md`
 - `handoff.md`
+- `features/index.md` for quick feature lookup
 - `features/` for one file per feature or workstream
 - assumptions and structured working memory
 
@@ -102,14 +103,17 @@ Use `.docs/` for user-facing deliverables:
 11. If the user directly asks for a specific deliverable, feature discussion, or implementation task and enough context already exists, do the work and capture the outcome automatically in the relevant memory files.
 12. Update only the memory files affected by the current work instead of rewriting everything.
 13. For normal coding work, update:
+   - `.agentic/workspace/memory/features/index.md`
    - the relevant feature file under `.agentic/workspace/memory/features/`
    - `.agentic/workspace/memory/project-state.md`
    - `.agentic/workspace/memory/handoff.md`
 14. When implementation work changes feature progress, always update the feature status and reflect that same status in `project-state.md` and `handoff.md`.
-15. Update `.agentic/workspace/memory/decisions.md` only when the work creates a meaningful product or technical decision.
-16. Update `.agentic/workspace/memory/requirements.md` or `.agentic/workspace/memory/architecture.md` only when the current work actually changes them.
-17. Prefer the target project root for Node-based export dependencies when a usable Node setup already exists there.
-18. If root is not suitable, ask the user which path should be used for dependency installation.
-19. Ask the user before running any install command.
-20. Ask only the minimum blocking questions required to continue.
-21. Always end by telling the user the exact next command to run or listing the available next options.
+15. Use `features/index.md` as the quick summary layer and individual feature files as the detailed source of truth.
+16. When a feature flow is important for understanding, store it in the feature file. Prefer Mermaid when the tool supports it, otherwise store the same flow as short ordered text.
+17. Update `.agentic/workspace/memory/decisions.md` only when the work creates a meaningful product or technical decision.
+18. Update `.agentic/workspace/memory/requirements.md` or `.agentic/workspace/memory/architecture.md` only when the current work actually changes them.
+19. Prefer the target project root for Node-based export dependencies when a usable Node setup already exists there.
+20. If root is not suitable, ask the user which path should be used for dependency installation.
+21. Ask the user before running any install command.
+22. Ask only the minimum blocking questions required to continue.
+23. Always end by telling the user the exact next command to run or listing the available next options.
