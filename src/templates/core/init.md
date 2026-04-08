@@ -49,6 +49,8 @@ You are starting a fresh AI session inside this project. Your job is to quickly 
    - treat page work, feature work, component work, route work, and flow changes as implementation work
    - use the behavior of `@.agentic/commands/implementation.md` even if the user did not explicitly tag it
    - update the relevant feature file, `project-state.md`, and `handoff.md` before finishing
+   - if the current chat is already in implementation work, keep using that implementation-memory behavior for later coding requests unless the user clearly changes to a different topic
+   - attach follow-up UI changes, state changes, API work, mock data, and related backend support to the active parent feature by default unless they are clearly separate
 9. If project context is still thin, ask a small number of targeted questions about:
    - project goal
    - target users
@@ -71,31 +73,33 @@ You are starting a fresh AI session inside this project. Your job is to quickly 
 15. Update `.agentic/workspace/memory/architecture.md` only if the new context changes architecture.
 16. If the user is discussing a specific feature, create or update a feature file under `.agentic/workspace/memory/features/` using kebab-case naming and include: feature name, current status, summary, requirements, implementation notes, dependencies, blockers, decisions affecting the feature, related docs, and next steps.
 17. Use module-first feature identity. Routes, screens, and alternate names should be treated as aliases or metadata attached to a canonical feature file.
-18. If `.agentic/workspace/memory/features/index.md` exists, use it as the quick lookup layer for feature status before reading deeper feature files.
-19. When the user asks about a specific feature, resolve likely matches by feature name, aliases, routes, or screens.
-20. If one clear match exists, read the feature file and explain its status and flow from there. Show a Mermaid diagram if the environment supports Mermaid, otherwise explain the same flow in short ordered text.
-21. If multiple likely matches exist, ask a short clarification question instead of guessing.
-22. Write drafts even from partial information.
-23. Clearly separate confirmed facts, assumptions, and open questions.
-24. Do not route immediately just because the workspace is empty. Do useful synthesis or ask focused questions first.
-25. Do not rewrite unrelated files just because `@.agentic/init.md` ran.
-26. If important project basics are still missing, continue asking focused questions and keep updating the memory files instead of routing forward yet.
-27. When suggesting next commands in resumed sessions, use the existing progress:
+18. If there is already an active feature in the session, treat follow-up coding requests as continuation of that parent feature by default unless the user clearly changes topics.
+19. If `.agentic/workspace/memory/features/index.md` exists, use it as the quick lookup layer for feature status before reading deeper feature files.
+20. When the user asks about a specific feature, resolve likely matches by feature name, aliases, routes, or screens.
+21. If one clear match exists, read the feature file and explain its status and flow from there. Show a Mermaid diagram if the environment supports Mermaid, otherwise explain the same flow in short ordered text.
+22. If multiple likely matches exist, ask a short clarification question instead of guessing.
+23. Write drafts even from partial information.
+24. Clearly separate confirmed facts, assumptions, and open questions.
+25. Do not route immediately just because the workspace is empty. Do useful synthesis or ask focused questions first.
+26. Do not rewrite unrelated files just because `@.agentic/init.md` ran.
+27. If important project basics are still missing, continue asking focused questions and keep updating the memory files instead of routing forward yet.
+28. When suggesting next commands in resumed sessions, use the existing progress:
    - if requirements exist but architecture does not, recommend `@.agentic/commands/architecture.md`
    - if the user is asking for coding or feature work, allow `@.agentic/commands/implementation.md`
    - if architecture exists, suggest `@.agentic/commands/create-brd.md`, `@.agentic/commands/create-proposal.md`, `@.agentic/commands/create-plan.md`, and `@.agentic/commands/create-tasks.md`
    - if BRD work already exists, also allow `@.agentic/commands/create-frd.md`
    - if FRD work already exists, also allow `@.agentic/commands/create-estimate.md`
    - if estimate work already exists, also allow `@.agentic/commands/create-proposal.md`
-28. For first-time projects, choose the handoff style based on the context level:
+29. For first-time projects, choose the handoff style based on the context level:
    - if the context is still partial, say you have a high-level understanding and offer:
      - `@.agentic/commands/project-requirements.md` to refine requirements further
      - `@.agentic/commands/architecture.md` only if the user wants to move forward with the current understanding
    - if the requirements are sufficient but not strong, present both `@.agentic/commands/project-requirements.md` and `@.agentic/commands/architecture.md`, with a light recommendation based on the remaining gaps
    - if the requirements are strong, recommend `@.agentic/commands/architecture.md`
-29. Never make architecture sound mandatory when the current understanding is still high level.
-30. When offering next steps, always make it clear the user can also say what they want to do now instead of following a listed command.
-31. Fresh-project gating rule:
+30. Never make architecture sound mandatory when the current understanding is still high level.
+31. When offering next steps, always make it clear the user can also say what they want to do now instead of following a listed command.
+32. Fresh-project gating rule:
    - on the very first `@.agentic/init.md` response for a fresh workspace, ask focused intake questions and do not route yet
    - after the user answers at least one intake round and you have enough context to synthesize, then you may offer next options such as `@.agentic/commands/project-requirements.md` and `@.agentic/commands/architecture.md`
    - if context is still high-level after that, present requirement refinement first and architecture as optional
+33. Before concluding any coding step that happens through `@.agentic/init.md` behavior, make sure the relevant feature file, `features/index.md`, `project-state.md`, and `handoff.md` have been updated.

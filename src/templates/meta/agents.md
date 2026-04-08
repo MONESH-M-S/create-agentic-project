@@ -49,6 +49,7 @@ If a workspace already contains memory and document progress, `@.agentic/init.md
 Memory capture is automatic during normal work. Users do not need to run a separate prompt just to store project context.
 
 For direct coding or feature requests, use `@.agentic/commands/implementation.md` or let `@.agentic/init.md` continue with implementation behavior automatically.
+Once a chat is already working on a feature, follow-up coding requests should keep updating that same parent feature by default unless the topic clearly changes.
 
 ## Output Conventions
 
@@ -88,5 +89,6 @@ Planned library stack:
 Use repo memory as the source of truth instead of tool-local memory paths or raw chat history.
 
 Use `features/index.md` for quick feature lookup and one canonical file per module or feature for detailed status, aliases, routes, flow, key code references, and implementation context. When useful, store feature flow diagrams in Mermaid.
+Store follow-up UI changes, theme work, API support, and mock-data work under the active parent feature by default unless they are clearly independent.
 
 If your tool does not support `@file` references, paste the contents of the prompt file into a new chat manually.

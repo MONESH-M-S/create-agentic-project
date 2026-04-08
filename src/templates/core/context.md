@@ -102,23 +102,29 @@ Use `.docs/` for user-facing deliverables:
 10. Do not restart basic intake if the workspace already contains strong memory unless the existing information is clearly incomplete or contradictory.
 11. If the user directly asks for a specific deliverable, feature discussion, or implementation task and enough context already exists, do the work and capture the outcome automatically in the relevant memory files.
 12. Update only the memory files affected by the current work instead of rewriting everything.
-13. For normal coding work, update:
+13. If the current chat is already in implementation work, keep using implementation-memory behavior for later coding requests unless the user clearly changes to a different topic.
+14. For normal coding work, update:
    - `.agentic/workspace/memory/features/index.md`
    - the relevant feature file under `.agentic/workspace/memory/features/`
    - `.agentic/workspace/memory/project-state.md`
    - `.agentic/workspace/memory/handoff.md`
-14. When implementation work changes feature progress, always update the feature status and reflect that same status in `project-state.md` and `handoff.md`.
-15. Use `features/index.md` as the quick summary layer and individual feature files as the detailed source of truth.
-16. Use module-first canonical feature identity. Routes, screens, and alternate names should be stored as metadata or aliases under the same feature instead of becoming separate primary records.
-17. If a user references a route or screen such as `/dashboard`, first try to match an existing feature by feature name, aliases, routes, or screens.
-18. If more than one likely feature matches, ask a short clarification question before updating memory.
-19. When a feature flow is important for understanding, store it in the feature file. Prefer Mermaid when the tool supports it, otherwise store the same flow as short ordered text.
-20. Capture key code references in the feature file so teammates can quickly find the relevant routes, pages, components, services, or modules.
-21. Keep the latest agreed state in the main feature file and store only a short revision summary for meaningful changes.
-22. Update `.agentic/workspace/memory/decisions.md` only when the work creates a meaningful product or technical decision.
-23. Update `.agentic/workspace/memory/requirements.md` or `.agentic/workspace/memory/architecture.md` only when the current work actually changes them.
-24. Prefer the target project root for Node-based export dependencies when a usable Node setup already exists there.
-25. If root is not suitable, ask the user which path should be used for dependency installation.
-26. Ask the user before running any install command.
-27. Ask only the minimum blocking questions required to continue.
-28. Always end by telling the user the exact next command to run or listing the available next options.
+15. When implementation work changes feature progress, always update the feature status and reflect that same status in `project-state.md` and `handoff.md`.
+16. Attach follow-up UI changes, state changes, API wiring, mock endpoints, and related backend support to the active parent feature by default.
+17. Only split follow-up work into a separate feature when it is clearly independent, reusable across multiple areas, or the user explicitly wants it tracked separately.
+18. If the request is cross-cutting but arrives in the middle of an active feature implementation session, attach it to that active parent feature by default and note the broader impact in `Related Areas`.
+19. If the request could reasonably belong to multiple parent features, ask a short clarification question before updating memory.
+20. Use `features/index.md` as the quick summary layer and individual feature files as the detailed source of truth.
+21. Use module-first canonical feature identity. Routes, screens, and alternate names should be stored as metadata or aliases under the same feature instead of becoming separate primary records.
+22. If a user references a route or screen such as `/dashboard`, first try to match an existing feature by feature name, aliases, routes, or screens.
+23. If more than one likely feature matches, ask a short clarification question before updating memory.
+24. When a feature flow is important for understanding, store it in the feature file. Prefer Mermaid when the tool supports it, otherwise store the same flow as short ordered text.
+25. Capture key code references in the feature file so teammates can quickly find the relevant routes, pages, components, services, API handlers, mock-data files, or modules.
+26. Keep the latest agreed state in the main feature file and store only a short revision summary for meaningful changes.
+27. Update `.agentic/workspace/memory/decisions.md` only when the work creates a meaningful product or technical decision.
+28. Update `.agentic/workspace/memory/requirements.md` or `.agentic/workspace/memory/architecture.md` only when the current work actually changes them.
+29. Before concluding any coding step, make sure the relevant feature file, `features/index.md`, `project-state.md`, and `handoff.md` have been updated. If they have not, the implementation step is incomplete.
+30. Prefer the target project root for Node-based export dependencies when a usable Node setup already exists there.
+31. If root is not suitable, ask the user which path should be used for dependency installation.
+32. Ask the user before running any install command.
+33. Ask only the minimum blocking questions required to continue.
+34. Always end by telling the user the exact next command to run or listing the available next options.
