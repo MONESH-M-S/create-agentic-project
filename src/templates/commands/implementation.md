@@ -34,26 +34,47 @@ Read:
 7. Ask only the minimum blocking questions needed to implement safely.
 8. If the work is cross-cutting but requested in the middle of an active feature implementation session, attach it to that active parent feature by default and note the broader impact in `Related Areas`.
 9. For APIs or data work created to support an active feature, store them under that same parent feature by default and capture the endpoints, purpose, and main files in `Implementation Notes` and `Key Code References`.
-10. Memory capture is always on for this step. Update:
-   - `.agentic/workspace/memory/project-state.md`
-   - `.agentic/workspace/memory/handoff.md`
-   - `.agentic/workspace/memory/features/index.md`
-   - `.agentic/workspace/memory/features/<feature>.md`
-11. Always update the feature status after the work. Use clear states such as:
+10. Memory capture is always on for this step and happens through `.agentic/workspace/scripts/sync_memory.js` using `.agentic/workspace/documents/memory-sync.json`.
+11. Start checkpoint, before or near the first implementation edits:
+   - identify or confirm the active parent feature
+   - prepare or update `.agentic/workspace/documents/memory-sync.json` with:
+     - `mode` = `checkpoint`
+     - the active feature identity
+     - `Current Status` = `in-progress`
+     - a short note about what is being changed now
+     - related route or screen if relevant
+   - run `.agentic/workspace/scripts/sync_memory.js` so the feature file and `project-state.md` reflect active implementation work
+   - update `handoff.md` during checkpoint only when useful for long-running or interrupted work
+12. Final sync, before concluding the task:
+   - update `.agentic/workspace/documents/memory-sync.json` with:
+     - `mode` = `finalize`
+     - final status such as `completed`, `partially completed`, or `blocked`
+     - latest implementation notes
+     - key code references
+     - related areas if the work had cross-cutting impact
+     - a short revision note when the change was meaningful
+     - project-state and handoff summary
+   - run `.agentic/workspace/scripts/sync_memory.js` to update:
+     - `.agentic/workspace/memory/features/<feature>.md`
+     - `.agentic/workspace/memory/features/index.md`
+     - `.agentic/workspace/memory/project-state.md`
+     - `.agentic/workspace/memory/handoff.md`
+13. Use `.agentic/commands/sync-memory.md` as the manual recovery path when earlier implementation work missed or partially captured memory.
+14. Always update the feature status after the work. Use clear states such as:
    - `planned`
    - `in-progress`
    - `completed`
    - `blocked`
-12. If implementation work is finished in this session, mark the feature as `completed` or `partially completed` clearly in the feature file and reflect that in `project-state.md`.
-13. Update `.agentic/workspace/memory/decisions.md` only if the work creates a meaningful product or technical decision.
-14. Update `.agentic/workspace/memory/requirements.md` only if the request changes product scope or behavior expectations.
-15. Update `.agentic/workspace/memory/architecture.md` only if the work changes architecture or important technical direction.
-16. Keep `project-state.md` and `handoff.md` short.
-17. Use one file per feature under `.agentic/workspace/memory/features/` with kebab-case naming such as:
+15. If implementation work is finished in this session, mark the feature as `completed` or `partially completed` clearly in the feature file and reflect that in `project-state.md`.
+16. Update `.agentic/workspace/memory/decisions.md` only if the work creates a meaningful product or technical decision.
+17. Update `.agentic/workspace/memory/requirements.md` only if the request changes product scope or behavior expectations.
+18. Update `.agentic/workspace/memory/architecture.md` only if the work changes architecture or important technical direction.
+19. Keep `project-state.md` and `handoff.md` short.
+20. Use one file per feature under `.agentic/workspace/memory/features/` with kebab-case naming such as:
    - `landing-page.md`
    - `about-page.md`
    - `checkout.md`
-18. Use this feature file structure:
+21. Use this feature file structure:
    - Feature Name
    - Current Status
    - Aliases
@@ -71,25 +92,25 @@ Read:
    - Related Outputs or Docs
    - Revision Summary
    - Next Steps
-19. Keep `.agentic/workspace/memory/features/index.md` short and update it with:
+22. Keep `.agentic/workspace/memory/features/index.md` short and update it with:
    - feature name
    - current status
    - short summary
    - priority if useful
    - aliases or route hints if useful
    - related feature file
-20. When explaining or updating a meaningful feature flow, include a Mermaid flowchart if the tool supports Mermaid. If Mermaid is not supported, store the same flow as a short ordered text flow under `User Flow`.
-21. Keep flow diagrams lightweight and readable. Use them for page flow, user journey, state transitions, approval flow, or feature branches, not for full system architecture.
-22. Capture key code references for the feature, such as important routes, components, pages, services, hooks, modules, API handlers, mock-data files, or other modules a teammate should inspect first.
-23. Keep the main feature file as the latest agreed state. Do not keep every intermediate iteration of brainstorming or planning.
-24. If something materially changes, add only a short `Revision Summary` entry with:
+23. When explaining or updating a meaningful feature flow, include a Mermaid flowchart if the tool supports Mermaid. If Mermaid is not supported, store the same flow as a short ordered text flow under `User Flow`.
+24. Keep flow diagrams lightweight and readable. Use them for page flow, user journey, state transitions, approval flow, or feature branches, not for full system architecture.
+25. Capture key code references for the feature, such as important routes, components, pages, services, hooks, modules, API handlers, mock-data files, or other modules a teammate should inspect first.
+26. Keep the main feature file as the latest agreed state. Do not keep every intermediate iteration of brainstorming or planning.
+27. If something materially changes, add only a short `Revision Summary` entry with:
    - date
    - what changed
    - why
-25. If implementation changed the final agreed plan, update the canonical feature sections instead of appending raw plan history.
-26. `project-state.md` must also be updated so the feature appears under the correct section such as current priorities, in progress, blockers, or completed work.
-27. `handoff.md` must mention whether the implementation was completed, partially completed, or left blocked, and what should happen next.
-28. Before concluding any coding step, update the memory for that step. If the feature file, `features/index.md`, `project-state.md`, and `handoff.md` were not updated, the implementation step is incomplete.
+28. If implementation changed the final agreed plan, update the canonical feature sections instead of appending raw plan history.
+29. `project-state.md` must also be updated so the feature appears under the correct section such as current priorities, in progress, blockers, or completed work.
+30. `handoff.md` must mention whether the implementation was completed, partially completed, or left blocked, and what should happen next.
+31. Before concluding any coding step, complete the final sync through `.agentic/workspace/scripts/sync_memory.js`. If the feature file, `features/index.md`, `project-state.md`, and `handoff.md` were not updated, the implementation step is incomplete and should not be treated as done.
 
 When the implementation work is complete enough, tell the user the available next options and make it clear they can also say what they want to do next.
 

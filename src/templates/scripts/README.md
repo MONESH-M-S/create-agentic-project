@@ -4,6 +4,8 @@ This folder contains starter Node.js export helpers for deliverables in `.docs/`
 
 These scripts are meant to be a starting point. The AI agent should update the relevant script for the current project when the user provides a template, a preferred structure, or custom formatting rules.
 
+This folder also contains a project-memory sync helper for implementation tracking inside `.agentic/workspace/memory/`.
+
 ## Included Starter Scripts
 
 - `generate_brd.js`
@@ -12,6 +14,7 @@ These scripts are meant to be a starting point. The AI agent should update the r
 - `generate_proposal.js`
 - `generate_plan.js`
 - `generate_tasks.js`
+- `sync_memory.js`
 - `_shared.js`
 
 ## Planned Libraries
@@ -37,6 +40,7 @@ The starter scripts read structured input from `.agentic/workspace/documents/` b
 - Proposal: `proposal.json`
 - Plan: `plan.json`
 - Tasks: `tasks.json`
+- Memory sync: `memory-sync.json`
 
 The agent may also keep matching `.md` drafts beside these files for human-readable working content.
 
@@ -56,3 +60,10 @@ The agent may also keep matching `.md` drafts beside these files for human-reada
 3. Adapt the relevant script if the project requires a custom template or style.
 4. Install the needed package only after user approval.
 5. Run the script from the project root.
+
+## Memory Sync Usage Pattern
+
+1. During implementation work, update `.agentic/workspace/documents/memory-sync.json`.
+2. Run `sync_memory.js` in `checkpoint` mode before or near the first implementation edits.
+3. Run `sync_memory.js` again in `finalize` mode before concluding the task.
+4. Use `@.agentic/commands/sync-memory.md` when repo memory needs a manual refresh or repair.

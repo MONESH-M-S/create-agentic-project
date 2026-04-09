@@ -50,6 +50,16 @@ function readJsonFile(relativePath) {
   return JSON.parse(fs.readFileSync(absolutePath, "utf8"));
 }
 
+function readTextFile(relativePath) {
+  const absolutePath = resolveFromRoot(relativePath);
+
+  if (!fs.existsSync(absolutePath)) {
+    return null;
+  }
+
+  return fs.readFileSync(absolutePath, "utf8");
+}
+
 function loadPackage(packageName) {
   try {
     return require(packageName);
@@ -67,6 +77,13 @@ function writeBuffer(relativePath, buffer) {
   const absolutePath = resolveFromRoot(relativePath);
   ensureParentDir(absolutePath);
   fs.writeFileSync(absolutePath, buffer);
+  return absolutePath;
+}
+
+function writeText(relativePath, content) {
+  const absolutePath = resolveFromRoot(relativePath);
+  ensureParentDir(absolutePath);
+  fs.writeFileSync(absolutePath, content, "utf8");
   return absolutePath;
 }
 
@@ -106,8 +123,10 @@ module.exports = {
   parseArgs,
   resolveFromRoot,
   readJsonFile,
+  readTextFile,
   loadPackage,
   writeBuffer,
+  writeText,
   writeSuccess,
   toParagraphs,
   deriveColumns,

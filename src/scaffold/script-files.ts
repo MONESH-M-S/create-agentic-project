@@ -26,4 +26,7 @@ export const scriptFiles: FileMap = {
   ".agentic/workspace/scripts/generate_tasks.js": readTemplate(
     "./templates/scripts/generate_tasks.js",
   ),
+  ".agentic/workspace/scripts/sync_memory.js": readTemplate(
+    "./templates/scripts/sync_memory.js",
+  ),
 };

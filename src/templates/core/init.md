@@ -51,6 +51,7 @@ You are starting a fresh AI session inside this project. Your job is to quickly 
    - update the relevant feature file, `project-state.md`, and `handoff.md` before finishing
    - if the current chat is already in implementation work, keep using that implementation-memory behavior for later coding requests unless the user clearly changes to a different topic
    - attach follow-up UI changes, state changes, API work, mock data, and related backend support to the active parent feature by default unless they are clearly separate
+   - use `.agentic/workspace/documents/memory-sync.json` plus `.agentic/workspace/scripts/sync_memory.js` for the start checkpoint and final sync
 9. If project context is still thin, ask a small number of targeted questions about:
    - project goal
    - target users
@@ -102,4 +103,6 @@ You are starting a fresh AI session inside this project. Your job is to quickly 
    - on the very first `@.agentic/init.md` response for a fresh workspace, ask focused intake questions and do not route yet
    - after the user answers at least one intake round and you have enough context to synthesize, then you may offer next options such as `@.agentic/commands/project-requirements.md` and `@.agentic/commands/architecture.md`
    - if context is still high-level after that, present requirement refinement first and architecture as optional
-33. Before concluding any coding step that happens through `@.agentic/init.md` behavior, make sure the relevant feature file, `features/index.md`, `project-state.md`, and `handoff.md` have been updated.
+33. For coding work that happens through `@.agentic/init.md` behavior, use a start checkpoint and a final sync through `.agentic/workspace/scripts/sync_memory.js`.
+34. Users normally should not need to run memory sync manually, but if repo memory is stale or missed they can use `@.agentic/commands/sync-memory.md` as an optional recovery path.
+35. Before concluding any coding step that happens through `@.agentic/init.md` behavior, make sure the relevant feature file, `features/index.md`, `project-state.md`, and `handoff.md` have been updated.

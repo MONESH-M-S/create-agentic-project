@@ -29,4 +29,7 @@ export const commandFiles: FileMap = {
   ".agentic/commands/implementation.md": readTemplate(
     "./templates/commands/implementation.md",
   ),
+  ".agentic/commands/sync-memory.md": readTemplate(
+    "./templates/commands/sync-memory.md",
+  ),
 };

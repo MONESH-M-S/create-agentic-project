@@ -122,9 +122,17 @@ Use `.docs/` for user-facing deliverables:
 26. Keep the latest agreed state in the main feature file and store only a short revision summary for meaningful changes.
 27. Update `.agentic/workspace/memory/decisions.md` only when the work creates a meaningful product or technical decision.
 28. Update `.agentic/workspace/memory/requirements.md` or `.agentic/workspace/memory/architecture.md` only when the current work actually changes them.
-29. Before concluding any coding step, make sure the relevant feature file, `features/index.md`, `project-state.md`, and `handoff.md` have been updated. If they have not, the implementation step is incomplete.
-30. Prefer the target project root for Node-based export dependencies when a usable Node setup already exists there.
-31. If root is not suitable, ask the user which path should be used for dependency installation.
-32. Ask the user before running any install command.
-33. Ask only the minimum blocking questions required to continue.
-34. Always end by telling the user the exact next command to run or listing the available next options.
+29. For implementation work, use two-phase memory capture:
+   - start checkpoint before or near the first implementation edits
+   - final sync before concluding the task
+30. Use `.agentic/workspace/documents/memory-sync.json` as the structured handoff for implementation memory sync.
+31. Use `.agentic/workspace/scripts/sync_memory.js` as the enforcement helper instead of manually editing all memory targets freehand every time.
+32. The start checkpoint should mark the active parent feature as `in-progress` and show the current implementation focus in the feature file and `project-state.md`.
+33. The final sync should update the feature file, `features/index.md`, `project-state.md`, and `handoff.md` with the completed, partially completed, or blocked outcome.
+34. Before concluding any coding step, make sure the final sync happened through `.agentic/workspace/scripts/sync_memory.js`. If it did not, the implementation step is incomplete.
+35. Users normally should not need to run memory sync manually, but `@.agentic/commands/sync-memory.md` is available as an optional recovery path when memory is stale or missed.
+36. Prefer the target project root for Node-based export dependencies when a usable Node setup already exists there.
+37. If root is not suitable, ask the user which path should be used for dependency installation.
+38. Ask the user before running any install command.
+39. Ask only the minimum blocking questions required to continue.
+40. Always end by telling the user the exact next command to run or listing the available next options.

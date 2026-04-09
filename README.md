@@ -16,9 +16,11 @@ Instead of losing context in old chats, this package creates a small in-repo sys
 After running the command, the project gets:
 
 - prompts for project understanding, architecture, BRD, FRD, estimate, proposal, plan, tasks, and implementation
+- a recovery command to refresh project memory if it ever gets out of sync
 - repo-based project memory
 - feature tracking files
 - starter export scripts for `.docx`, `.xlsx`, and `.pptx`
+- an internal memory-sync helper for implementation tracking
 
 This means a teammate can pull the repo, open the agent, and ask things like:
 
@@ -87,6 +89,7 @@ It is also flexible:
 3. Start a new session with `@.agentic/init.md`.
 4. Let the agent understand the project and continue with the command you need.
 5. As work happens, the agent updates project memory and feature files in the repo.
+6. If memory ever looks stale, run `@.agentic/commands/sync-memory.md` to refresh it.
 
 ## What Makes It Useful Later
 

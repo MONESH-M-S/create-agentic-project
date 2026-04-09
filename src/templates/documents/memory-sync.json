@@ -1,0 +1,30 @@
+{
+  "mode": "finalize",
+  "feature_slug": "",
+  "feature_name": "",
+  "status": "planned",
+  "summary": "",
+  "aliases": [],
+  "routes_or_screens": [],
+  "related_areas": [],
+  "implementation_notes": [],
+  "key_code_references": [],
+  "blockers": [],
+  "next_steps": [],
+  "revision_note": "",
+  "project_state_update": {
+    "current_phase": "",
+    "current_priorities": [],
+    "in_progress": [],
+    "completed_outputs": [],
+    "active_features": [],
+    "blockers": [],
+    "suggested_next_actions": []
+  },
+  "handoff_update": {
+    "what_happened": "",
+    "what_changed": "",
+    "what_remains_open": "",
+    "where_to_continue_next": ""
+  }
+}

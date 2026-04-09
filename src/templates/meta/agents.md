@@ -37,6 +37,7 @@ Use this scaffold when you want an AI tool to:
 3. `@.agentic/commands/architecture.md`
 4. Then choose from the available options shown by the current command, such as:
    - `@.agentic/commands/implementation.md`
+   - `@.agentic/commands/sync-memory.md`
    - `@.agentic/commands/create-brd.md`
    - `@.agentic/commands/create-frd.md`
    - `@.agentic/commands/create-estimate.md`
@@ -50,6 +51,8 @@ Memory capture is automatic during normal work. Users do not need to run a separ
 
 For direct coding or feature requests, use `@.agentic/commands/implementation.md` or let `@.agentic/init.md` continue with implementation behavior automatically.
 Once a chat is already working on a feature, follow-up coding requests should keep updating that same parent feature by default unless the topic clearly changes.
+Implementation memory should use a start checkpoint and a final sync through `.agentic/workspace/scripts/sync_memory.js`. A coding task is not complete until the final memory sync has updated the feature file, feature index, project state, and handoff.
+If automatic sync was missed, `@.agentic/commands/sync-memory.md` is the optional repair path.
 
 ## Output Conventions
 
