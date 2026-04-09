@@ -51,6 +51,7 @@ If you say you want to refine requirements, it should keep asking requirement qu
 If a workspace already contains memory and document progress, `@.agentic/init.md` should summarize what is already known, update memory with any new context from the user, and let the user continue from the relevant next step instead of restarting the full sequence.
 
 Memory capture is automatic during normal work. Users do not need to run a separate prompt just to store project context.
+Normal implementation work should not create default implementation-plan artifacts unless a plan was explicitly requested or truly needed.
 
 For direct coding or feature requests, use `@.agentic/commands/implementation.md` or let `@.agentic/init.md` continue with implementation behavior automatically.
 Once a chat is already working on a feature, follow-up coding requests should keep updating that same parent feature by default unless the topic clearly changes.
@@ -93,6 +94,7 @@ Planned library stack:
 `.agentic/workspace/memory/` is the shared project memory layer across tools such as Codex, Claude, Cursor, Antigravity, and others.
 
 Use repo memory as the source of truth instead of tool-local memory paths or raw chat history.
+Use repo memory first, then inspect relevant source files outside `.agentic` when you need to validate implemented work or understand the real codebase structure.
 
 Use `features/index.md` for quick feature lookup and one canonical file per module or feature for detailed status, aliases, routes, flow, key code references, and implementation context. When useful, store feature flow diagrams in Mermaid.
 Store follow-up UI changes, theme work, API support, and mock-data work under the active parent feature by default unless they are clearly independent.

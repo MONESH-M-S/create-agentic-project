@@ -7,13 +7,23 @@ You are starting a fresh AI session inside this project. Your job is to quickly 
 ## Read Scope
 
 1. Read only root-level files and folders in the current project.
-2. Do not recursively inspect the full repository.
-3. Treat `.agentic/` as the exception:
+2. Do not recursively inspect the full repository by default.
+3. Treat `.agentic/` and `.docs/` as the primary resume and memory areas:
    - inspect `.agentic/workspace/project/`
    - inspect `.agentic/workspace/memory/`
    - inspect `.agentic/workspace/documents/`
    - inspect `.docs/`
-4. Use existing workspace context if it is already present.
+4. Also inspect key codebase files outside `.agentic/` when useful, such as:
+   - `package.json`
+   - framework/router entry files
+   - key folders like `src/`, `app/`, `pages/`, `api/`, `server/`
+   - relevant config files
+5. Use targeted codebase inspection outside `.agentic/` when:
+   - the user asks what has been implemented
+   - repo memory is missing, stale, or contradictory
+   - you need to validate implementation against real code
+   - the user asks something that requires understanding the codebase structure
+6. Do not scan unrelated folders when targeted inspection is enough.
 
 ## Response Style
 
@@ -35,8 +45,13 @@ You are starting a fresh AI session inside this project. Your job is to quickly 
    - existing workspace files
    - the user's message in this chat
 4. Treat repo memory under `.agentic/workspace/memory/` as the shared source of truth across tools and sessions.
-5. If `project-overview.md`, `requirements.md`, `architecture.md`, `project-state.md`, internal drafts, or user-facing outputs already exist, treat this as an in-progress workspace and resume from what is already known.
-6. In resumed sessions:
+5. Use this precedence when answering project-state or implementation questions:
+   - first use `.agentic/workspace/memory/`
+   - if memory is incomplete or the user asks about real implemented work, inspect the relevant codebase areas
+   - if code and memory disagree, prefer truth from the codebase and refresh memory accordingly
+   - when an answer came from code inspection outside `.agentic`, make that clear
+6. If `project-overview.md`, `requirements.md`, `architecture.md`, `project-state.md`, internal drafts, or user-facing outputs already exist, treat this as an in-progress workspace and resume from what is already known.
+7. In resumed sessions:
    - give a short summary of what is already understood
    - summarize current project state, active features, blockers, and next actions when that information exists
    - prioritize `.agentic/workspace/memory/features/index.md` as the quick feature summary when it exists
@@ -44,15 +59,16 @@ You are starting a fresh AI session inside this project. Your job is to quickly 
    - do not ask basic project questions again unless the existing memory is clearly incomplete, contradictory, or missing a blocking detail
    - if the user adds new context, update the relevant memory files before suggesting what to do next
    - suggest valid next commands based on the current progress instead of forcing `@.agentic/commands/project-requirements.md`
-7. Memory capture is always on. Do not require a separate memory-capture prompt to store useful project information.
-8. If the user directly asks to create, continue, or implement something and the existing context is sufficient, follow that request instead of routing them back through the recommended sequence.
+8. Memory capture is always on. Do not require a separate memory-capture prompt to store useful project information.
+9. If the user directly asks to create, continue, or implement something and the existing context is sufficient, follow that request instead of routing them back through the recommended sequence.
    - treat page work, feature work, component work, route work, and flow changes as implementation work
    - use the behavior of `@.agentic/commands/implementation.md` even if the user did not explicitly tag it
    - update the relevant feature file, `project-state.md`, and `handoff.md` before finishing
    - if the current chat is already in implementation work, keep using that implementation-memory behavior for later coding requests unless the user clearly changes to a different topic
    - attach follow-up UI changes, state changes, API work, mock data, and related backend support to the active parent feature by default unless they are clearly separate
    - use `.agentic/workspace/documents/memory-sync.json` plus `.agentic/workspace/scripts/sync_memory.js` for the start checkpoint and final sync
-9. If project context is still thin, ask a small number of targeted questions about:
+   - do not create implementation plan artifacts by default for normal feature work
+10. If project context is still thin, ask a small number of targeted questions about:
    - project goal
    - target users
    - scope or modules
@@ -61,12 +77,12 @@ You are starting a fresh AI session inside this project. Your job is to quickly 
      - understand and store project context first
      - refine requirements
      - move toward a specific deliverable
-10. When design references are important and the user mentions Figma, you may suggest using Figma MCP if it is available in the environment, but ask the user before using it. If it is not available, ask for screenshots, exported frames, links, or file paths and continue normally.
-11. Judge the current context level before suggesting what comes next:
+11. When design references are important and the user mentions Figma, you may suggest using Figma MCP if it is available in the environment, but ask the user before using it. If it is not available, ask for screenshots, exported frames, links, or file paths and continue normally.
+12. Judge the current context level before suggesting what comes next:
    - `partial context`: there is only a high-level understanding and important requirement detail is still missing
    - `sufficient requirements`: the project is understandable enough to move into architecture, but requirement refinement could still improve the result
    - `strong requirements`: the requirement understanding is detailed enough that architecture is the clear recommended next step
-12. Treat `context-only mode` as a first-class fresh-project mode.
+13. Treat `context-only mode` as a first-class fresh-project mode.
    - trigger it when the user says things like:
      - understand the project first
      - get project context
@@ -80,7 +96,7 @@ You are starting a fresh AI session inside this project. Your job is to quickly 
      - summarize confirmed facts, assumptions, and open questions
      - do not create implementation plans, architecture output, or delivery-oriented artifacts yet
      - do not interpret context-only replies as permission to move into execution
-13. Treat `requirements-refinement mode` as separate from implementation mode.
+14. Treat `requirements-refinement mode` as separate from implementation mode.
    - trigger it when the user says things like:
      - refine requirements
      - continue requirements
@@ -91,37 +107,41 @@ You are starting a fresh AI session inside this project. Your job is to quickly 
      - summarize current understanding and what is missing
      - update `project-overview.md`, `requirements.md`, `open-questions.md`, `project-state.md`, and `handoff.md`
      - do not create implementation plans unless the user explicitly asks to build something or a concrete implementation decision is truly necessary
-14. If enough context exists, give a short summary of the project and the most important missing pieces.
-15. If the user mentions screenshots, notes, requirement docs, links, or file paths, move or organize them into `.agentic/workspace/project/` by default unless the user explicitly says not to.
-16. After the first useful exchange, create or update:
+15. If enough context exists, give a short summary of the project and the most important missing pieces.
+16. If the user mentions screenshots, notes, requirement docs, links, or file paths, move or organize them into `.agentic/workspace/project/` by default unless the user explicitly says not to.
+17. After the first useful exchange, create or update:
    - `.agentic/workspace/memory/project-overview.md`
    - `.agentic/workspace/memory/requirements.md`
    - `.agentic/workspace/memory/open-questions.md`
    - `.agentic/workspace/memory/project-state.md`
    - `.agentic/workspace/memory/handoff.md`
-17. Update `.agentic/workspace/memory/architecture.md` only if the new context changes architecture.
-18. In context-only mode, do not create implementation planning artifacts and do not frame the response as if delivery work has started.
-19. In requirements-refinement mode, do not create implementation plans unless the user explicitly requests implementation or a concrete implementation decision is truly required to answer the requirement question well.
-20. If the user is discussing a specific feature, create or update a feature file under `.agentic/workspace/memory/features/` using kebab-case naming and include: feature name, current status, summary, requirements, implementation notes, dependencies, blockers, decisions affecting the feature, related docs, and next steps.
-21. Use module-first feature identity. Routes, screens, and alternate names should be treated as aliases or metadata attached to a canonical feature file.
-22. If there is already an active feature in the session, treat follow-up coding requests as continuation of that parent feature by default unless the user clearly changes topics.
-23. If `.agentic/workspace/memory/features/index.md` exists, use it as the quick lookup layer for feature status before reading deeper feature files.
-24. When the user asks about a specific feature, resolve likely matches by feature name, aliases, routes, or screens.
-25. If one clear match exists, read the feature file and explain its status and flow from there. Show a Mermaid diagram if the environment supports Mermaid, otherwise explain the same flow in short ordered text.
-26. If multiple likely matches exist, ask a short clarification question instead of guessing.
-27. Write drafts even from partial information.
-28. Clearly separate confirmed facts, assumptions, and open questions.
-29. Do not route immediately just because the workspace is empty. Do useful synthesis or ask focused questions first.
-30. Do not rewrite unrelated files just because `@.agentic/init.md` ran.
-31. If important project basics are still missing, continue asking focused questions and keep updating the memory files instead of routing forward yet.
-32. When suggesting next commands in resumed sessions, use the existing progress:
+18. Update `.agentic/workspace/memory/architecture.md` only if the new context changes architecture.
+19. In context-only mode, do not create implementation planning artifacts and do not frame the response as if delivery work has started.
+20. In requirements-refinement mode, do not create implementation plans unless the user explicitly requests implementation or a concrete implementation decision is truly required to answer the requirement question well.
+21. For normal implementation work, go straight to coding plus memory sync unless:
+   - the user explicitly asks for a plan
+   - the task is ambiguous enough that a short plan is truly needed before coding
+   - a separate plan artifact is already part of the requested workflow
+22. If the user is discussing a specific feature, create or update a feature file under `.agentic/workspace/memory/features/` using kebab-case naming and include: feature name, current status, summary, requirements, implementation notes, dependencies, blockers, decisions affecting the feature, related docs, and next steps.
+23. Use module-first feature identity. Routes, screens, and alternate names should be treated as aliases or metadata attached to a canonical feature file.
+24. If there is already an active feature in the session, treat follow-up coding requests as continuation of that parent feature by default unless the user clearly changes topics.
+25. If `.agentic/workspace/memory/features/index.md` exists, use it as the quick lookup layer for feature status before reading deeper feature files.
+26. When the user asks about a specific feature, resolve likely matches by feature name, aliases, routes, or screens.
+27. If one clear match exists, answer from feature memory first. If the memory looks incomplete, inspect the relevant code areas and make it clear that the answer was validated from code.
+28. If multiple likely matches exist, ask a short clarification question instead of guessing.
+29. Write drafts even from partial information.
+30. Clearly separate confirmed facts, assumptions, and open questions.
+31. Do not route immediately just because the workspace is empty. Do useful synthesis or ask focused questions first.
+32. Do not rewrite unrelated files just because `@.agentic/init.md` ran.
+33. If important project basics are still missing, continue asking focused questions and keep updating the memory files instead of routing forward yet.
+34. When suggesting next commands in resumed sessions, use the existing progress:
    - if requirements exist but architecture does not, recommend `@.agentic/commands/architecture.md`
    - if the user is asking for coding or feature work, allow `@.agentic/commands/implementation.md`
    - if architecture exists, suggest `@.agentic/commands/create-brd.md`, `@.agentic/commands/create-proposal.md`, `@.agentic/commands/create-plan.md`, and `@.agentic/commands/create-tasks.md`
    - if BRD work already exists, also allow `@.agentic/commands/create-frd.md`
    - if FRD work already exists, also allow `@.agentic/commands/create-estimate.md`
    - if estimate work already exists, also allow `@.agentic/commands/create-proposal.md`
-33. For first-time projects, choose the handoff style based on the context level:
+35. For first-time projects, choose the handoff style based on the context level:
    - if the user explicitly wants context only, say that you have stored the current project context, summarize what is known and what is missing, and stop short of execution framing
    - if the user wants to refine requirements, continue requirement discovery and summarization first instead of creating implementation plans
    - if the context is still partial, say you have a high-level understanding and offer:
@@ -129,12 +149,12 @@ You are starting a fresh AI session inside this project. Your job is to quickly 
      - `@.agentic/commands/architecture.md` only if the user wants to move forward with the current understanding
    - if the requirements are sufficient but not strong, present both `@.agentic/commands/project-requirements.md` and `@.agentic/commands/architecture.md`, with a light recommendation based on the remaining gaps
    - if the requirements are strong, recommend `@.agentic/commands/architecture.md`
-34. Never make architecture sound mandatory when the current understanding is still high level.
-35. When offering next steps, always make it clear the user can also say what they want to do now instead of following a listed command.
-36. Fresh-project gating rule:
+36. Never make architecture sound mandatory when the current understanding is still high level.
+37. When offering next steps, always make it clear the user can also say what they want to do now instead of following a listed command.
+38. Fresh-project gating rule:
    - on the very first `@.agentic/init.md` response for a fresh workspace, ask focused intake questions and do not route yet
    - after the user answers at least one intake round and you have enough context to synthesize, then you may offer next options such as `@.agentic/commands/project-requirements.md` and `@.agentic/commands/architecture.md`
    - if context is still high-level after that, present requirement refinement first and architecture as optional
-37. For coding work that happens through `@.agentic/init.md` behavior, use a start checkpoint and a final sync through `.agentic/workspace/scripts/sync_memory.js`.
-38. Users normally should not need to run memory sync manually, but if repo memory is stale or missed they can use `@.agentic/commands/sync-memory.md` as an optional recovery path.
-39. Before concluding any coding step that happens through `@.agentic/init.md` behavior, make sure the relevant feature file, `features/index.md`, `project-state.md`, and `handoff.md` have been updated.
+39. For coding work that happens through `@.agentic/init.md` behavior, use a start checkpoint and a final sync through `.agentic/workspace/scripts/sync_memory.js`.
+40. Users normally should not need to run memory sync manually, but if repo memory is stale or missed they can use `@.agentic/commands/sync-memory.md` as an optional recovery path.
+41. Before concluding any coding step that happens through `@.agentic/init.md` behavior, make sure the relevant feature file, `features/index.md`, `project-state.md`, and `handoff.md` have been updated.
