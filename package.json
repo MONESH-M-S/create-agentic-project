@@ -1,6 +1,6 @@
 {
   "name": "create-agentic-starter",
-  "version": "0.1.28",
+  "version": "0.1.29",
   "description": "Scaffold a minimal AI-powered project delivery workflow inside the current folder.",
   "license": "MIT",
   "type": "module",

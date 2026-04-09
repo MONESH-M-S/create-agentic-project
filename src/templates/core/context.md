@@ -104,37 +104,39 @@ Use `.docs/` for user-facing deliverables:
 12. Update only the memory files affected by the current work instead of rewriting everything.
 13. In fresh-project init, treat “understand/store the project context first” as a valid context-only mode.
 14. In context-only mode, update repo memory and summarize what is known, but do not create implementation plans, architecture output, or delivery-oriented artifacts yet.
-15. If the current chat is already in implementation work, keep using implementation-memory behavior for later coding requests unless the user clearly changes to a different topic.
-16. For normal coding work, update:
+15. In fresh-project init, treat “refine requirements” as requirements-discovery mode, not implementation mode.
+16. In requirements-discovery mode, keep asking requirement questions and updating memory unless the user explicitly asks to build something or a concrete implementation decision is truly necessary.
+17. If the current chat is already in implementation work, keep using implementation-memory behavior for later coding requests unless the user clearly changes to a different topic.
+18. For normal coding work, update:
    - `.agentic/workspace/memory/features/index.md`
    - the relevant feature file under `.agentic/workspace/memory/features/`
    - `.agentic/workspace/memory/project-state.md`
    - `.agentic/workspace/memory/handoff.md`
-15. When implementation work changes feature progress, always update the feature status and reflect that same status in `project-state.md` and `handoff.md`.
-16. Attach follow-up UI changes, state changes, API wiring, mock endpoints, and related backend support to the active parent feature by default.
-17. Only split follow-up work into a separate feature when it is clearly independent, reusable across multiple areas, or the user explicitly wants it tracked separately.
-18. If the request is cross-cutting but arrives in the middle of an active feature implementation session, attach it to that active parent feature by default and note the broader impact in `Related Areas`.
-19. If the request could reasonably belong to multiple parent features, ask a short clarification question before updating memory.
-20. Use `features/index.md` as the quick summary layer and individual feature files as the detailed source of truth.
-21. Use module-first canonical feature identity. Routes, screens, and alternate names should be stored as metadata or aliases under the same feature instead of becoming separate primary records.
-22. If a user references a route or screen such as `/dashboard`, first try to match an existing feature by feature name, aliases, routes, or screens.
-23. If more than one likely feature matches, ask a short clarification question before updating memory.
-24. When a feature flow is important for understanding, store it in the feature file. Prefer Mermaid when the tool supports it, otherwise store the same flow as short ordered text.
-25. Capture key code references in the feature file so teammates can quickly find the relevant routes, pages, components, services, API handlers, mock-data files, or modules.
-26. Keep the latest agreed state in the main feature file and store only a short revision summary for meaningful changes.
-27. Update `.agentic/workspace/memory/decisions.md` only when the work creates a meaningful product or technical decision.
-28. Update `.agentic/workspace/memory/requirements.md` or `.agentic/workspace/memory/architecture.md` only when the current work actually changes them.
-29. For implementation work, use two-phase memory capture:
+19. When implementation work changes feature progress, always update the feature status and reflect that same status in `project-state.md` and `handoff.md`.
+20. Attach follow-up UI changes, state changes, API wiring, mock endpoints, and related backend support to the active parent feature by default.
+21. Only split follow-up work into a separate feature when it is clearly independent, reusable across multiple areas, or the user explicitly wants it tracked separately.
+22. If the request is cross-cutting but arrives in the middle of an active feature implementation session, attach it to that active parent feature by default and note the broader impact in `Related Areas`.
+23. If the request could reasonably belong to multiple parent features, ask a short clarification question before updating memory.
+24. Use `features/index.md` as the quick summary layer and individual feature files as the detailed source of truth.
+25. Use module-first canonical feature identity. Routes, screens, and alternate names should be stored as metadata or aliases under the same feature instead of becoming separate primary records.
+26. If a user references a route or screen such as `/dashboard`, first try to match an existing feature by feature name, aliases, routes, or screens.
+27. If more than one likely feature matches, ask a short clarification question before updating memory.
+28. When a feature flow is important for understanding, store it in the feature file. Prefer Mermaid when the tool supports it, otherwise store the same flow as short ordered text.
+29. Capture key code references in the feature file so teammates can quickly find the relevant routes, pages, components, services, API handlers, mock-data files, or modules.
+30. Keep the latest agreed state in the main feature file and store only a short revision summary for meaningful changes.
+31. Update `.agentic/workspace/memory/decisions.md` only when the work creates a meaningful product or technical decision.
+32. Update `.agentic/workspace/memory/requirements.md` or `.agentic/workspace/memory/architecture.md` only when the current work actually changes them.
+33. For implementation work, use two-phase memory capture:
    - start checkpoint before or near the first implementation edits
    - final sync before concluding the task
-30. Use `.agentic/workspace/documents/memory-sync.json` as the structured handoff for implementation memory sync.
-31. Use `.agentic/workspace/scripts/sync_memory.js` as the enforcement helper instead of manually editing all memory targets freehand every time.
-32. The start checkpoint should mark the active parent feature as `in-progress` and show the current implementation focus in the feature file and `project-state.md`.
-33. The final sync should update the feature file, `features/index.md`, `project-state.md`, and `handoff.md` with the completed, partially completed, or blocked outcome.
-34. Before concluding any coding step, make sure the final sync happened through `.agentic/workspace/scripts/sync_memory.js`. If it did not, the implementation step is incomplete.
-35. Users normally should not need to run memory sync manually, but `@.agentic/commands/sync-memory.md` is available as an optional recovery path when memory is stale or missed.
-36. Prefer the target project root for Node-based export dependencies when a usable Node setup already exists there.
-37. If root is not suitable, ask the user which path should be used for dependency installation.
-38. Ask the user before running any install command.
-39. Ask only the minimum blocking questions required to continue.
-40. Always end by telling the user the exact next command to run or listing the available next options.
+34. Use `.agentic/workspace/documents/memory-sync.json` as the structured handoff for implementation memory sync.
+35. Use `.agentic/workspace/scripts/sync_memory.js` as the enforcement helper instead of manually editing all memory targets freehand every time.
+36. The start checkpoint should mark the active parent feature as `in-progress` and show the current implementation focus in the feature file and `project-state.md`.
+37. The final sync should update the feature file, `features/index.md`, `project-state.md`, and `handoff.md` with the completed, partially completed, or blocked outcome.
+38. Before concluding any coding step, make sure the final sync happened through `.agentic/workspace/scripts/sync_memory.js`. If it did not, the implementation step is incomplete.
+39. Users normally should not need to run memory sync manually, but `@.agentic/commands/sync-memory.md` is available as an optional recovery path when memory is stale or missed.
+40. Prefer the target project root for Node-based export dependencies when a usable Node setup already exists there.
+41. If root is not suitable, ask the user which path should be used for dependency installation.
+42. Ask the user before running any install command.
+43. Ask only the minimum blocking questions required to continue.
+44. Always end by telling the user the exact next command to run or listing the available next options.
