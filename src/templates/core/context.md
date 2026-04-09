@@ -102,8 +102,10 @@ Use `.docs/` for user-facing deliverables:
 10. Do not restart basic intake if the workspace already contains strong memory unless the existing information is clearly incomplete or contradictory.
 11. If the user directly asks for a specific deliverable, feature discussion, or implementation task and enough context already exists, do the work and capture the outcome automatically in the relevant memory files.
 12. Update only the memory files affected by the current work instead of rewriting everything.
-13. If the current chat is already in implementation work, keep using implementation-memory behavior for later coding requests unless the user clearly changes to a different topic.
-14. For normal coding work, update:
+13. In fresh-project init, treat “understand/store the project context first” as a valid context-only mode.
+14. In context-only mode, update repo memory and summarize what is known, but do not create implementation plans, architecture output, or delivery-oriented artifacts yet.
+15. If the current chat is already in implementation work, keep using implementation-memory behavior for later coding requests unless the user clearly changes to a different topic.
+16. For normal coding work, update:
    - `.agentic/workspace/memory/features/index.md`
    - the relevant feature file under `.agentic/workspace/memory/features/`
    - `.agentic/workspace/memory/project-state.md`

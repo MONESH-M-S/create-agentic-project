@@ -30,6 +30,8 @@ Use this scaffold when you want an AI tool to:
 3. On fresh projects, follow the command flow below.
 4. On resumed projects, let `@.agentic/init.md` summarize the current state and continue from the current stage.
 
+Fresh-project `@.agentic/init.md` also supports a context-only mode. If you only want the agent to understand and store project context first, say that directly and it should stay in synthesis/memory-capture mode instead of moving into delivery planning.
+
 ## Command Flow
 
 1. `@.agentic/init.md`
